@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Owin;
+using System.Linq;
 using TesisUdistrital.Models;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace TesisUdistrital.Account
 {
@@ -12,50 +16,76 @@ namespace TesisUdistrital.Account
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            RegisterHyperLink.NavigateUrl = "Register";
-            // Enable this once you have account confirmation enabled for password reset functionality
-            //ForgotPasswordHyperLink.NavigateUrl = "Forgot";
-            OpenAuthLogin.ReturnUrl = Request.QueryString["ReturnUrl"];
-            var returnUrl = HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"]);
-            if (!String.IsNullOrEmpty(returnUrl))
+            
+        }
+        protected void LogIn(object sender, EventArgs e)
+        {
+            try
             {
-                RegisterHyperLink.NavigateUrl += "?ReturnUrl=" + returnUrl;
+                if (UsuarioValido(Email.Text, Password.Text))
+                {
+                    string usuario = Email.Text;
+                    string contrasena = EncriptarContrasena(Password.Text);
+                    DocumentacionDemoEntities contexto = new DocumentacionDemoEntities();
+                    usuario idusuario = contexto.usuario.SingleOrDefault(X => X.usuarioLogin.Equals(usuario) && X.contrasena.Equals(contrasena));
+                    Session["usuarioLogeado"] = idusuario;
+                    Response.Redirect("~/Modulo/Home.aspx", true);
+                }
+                else
+                {
+                    Session["usuarioLogeado"] = null;
+                    PnlMensajes.CssClass = "alert alert-danger";
+                    Label textoError = new Label();
+                    textoError.Text = "Error: Las credenciales de acceso no son correctas.";
+                    PnlMensajes.Controls.Add(textoError);
+                }
+            }
+            catch
+            {
+                Session["usuarioLogeado"] = null;
+                PnlMensajes.CssClass = "alert alert-danger";
+                Label textoError = new Label();
+                textoError.Text = "Error: No se ha podido establecer conexion con la base de datos, intente nuevamente";
+                PnlMensajes.Controls.Add(textoError);
             }
         }
 
-        protected void LogIn(object sender, EventArgs e)
+        public string EncriptarContrasena(string contrasena)
         {
-            if (IsValid)
+            // step 1, calculate MD5 hash from input
+            MD5 md5 = MD5.Create();
+            byte[] inputBytes = Encoding.ASCII.GetBytes(contrasena);
+            byte[] hash = md5.ComputeHash(inputBytes);
+
+            // step 2, convert byte array to hex string
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
             {
-                // Validate the user password
-                var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
-                var signinManager = Context.GetOwinContext().GetUserManager<ApplicationSignInManager>();
-
-                // This doen't count login failures towards account lockout
-                // To enable password failures to trigger lockout, change to shouldLockout: true
-                var result = signinManager.PasswordSignIn(Email.Text, Password.Text, RememberMe.Checked, shouldLockout: false);
-
-                switch (result)
-                {
-                    case SignInStatus.Success:
-                        IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
-                        break;
-                    case SignInStatus.LockedOut:
-                        Response.Redirect("/Account/Lockout");
-                        break;
-                    case SignInStatus.RequiresVerification:
-                        Response.Redirect(String.Format("/Account/TwoFactorAuthenticationSignIn?ReturnUrl={0}&RememberMe={1}", 
-                                                        Request.QueryString["ReturnUrl"],
-                                                        RememberMe.Checked),
-                                          true);
-                        break;
-                    case SignInStatus.Failure:
-                    default:
-                        FailureText.Text = "Invalid login attempt";
-                        ErrorMessage.Visible = true;
-                        break;
-                }
+                sb.Append(hash[i].ToString("X2"));
             }
+            return sb.ToString();
+        }
+        private bool UsuarioValido(string usuario, string contrasena)
+        {
+            try
+            {
+                DocumentacionDemoEntities contexto = new DocumentacionDemoEntities();
+                string contrasenaValida = EncriptarContrasena(contrasena);
+                bool valido = false;
+                valido = contexto.usuario.Any(X => X.usuarioLogin == usuario && X.contrasena == contrasenaValida);
+                return valido;
+            }
+            catch
+            {
+                Session["usuarioLogeado"] = null;
+                PnlMensajes.CssClass = "alert alert-danger";
+                Label textoError = new Label();
+                textoError.Text = "Error: No se ha podido realizar la tarea solicitada, intente nuevamente";
+                PnlMensajes.Controls.Add(textoError);
+                bool valido = false;
+                return valido;
+            }
+
         }
     }
 }

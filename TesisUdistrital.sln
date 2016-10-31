@@ -5,6 +5,13 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TesisUdistrital", "TesisUdistrital\TesisUdistrital.csproj", "{DA1B728A-BAD2-48B0-B35B-500FB575B45C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{906A42DB-D042-4A0E-8F14-D3C1377A327F}"
+	ProjectSection(SolutionItems) = preProject
+		TesisUdistrital\Login.Master = TesisUdistrital\Login.Master
+		TesisUdistrital\Login.Master.cs = TesisUdistrital\Login.Master.cs
+		TesisUdistrital\Login.Master.designer.cs = TesisUdistrital\Login.Master.designer.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

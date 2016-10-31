@@ -27,7 +27,7 @@ namespace TesisUdistrital
         public string segundoApellido { get; set; }
         public long tipoDocumento { get; set; }
         public string noDocumento { get; set; }
-        public string usuario1 { get; set; }
+        public string usuarioLogin { get; set; }
         public string contrasena { get; set; }
     
         public virtual tipoDocumento tipoDocumento1 { get; set; }

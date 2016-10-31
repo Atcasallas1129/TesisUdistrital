@@ -592,7 +592,7 @@ warning 6002: The table/view 'DocumentacionDemo.dbo.vw_informacionPersona' does 
           <Property Name="segundoApellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="tipoDocumento" Type="Int64" Nullable="false" />
           <Property Name="noDocumento" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="usuario1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="usuarioLogin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="contrasena" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="tipoDocumento1" Relationship="Self.FK_usuario_tipoDocumento" FromRole="usuario" ToRole="tipoDocumento" />
           <NavigationProperty Name="procesoDocumentacion" Relationship="Self.FK_procesoDocumentacion_usuario" FromRole="usuario" ToRole="procesoDocumentacion" />
@@ -1019,7 +1019,7 @@ warning 6002: The table/view 'DocumentacionDemo.dbo.vw_informacionPersona' does 
                 <ScalarProperty Name="segundoApellido" ColumnName="segundoApellido" />
                 <ScalarProperty Name="tipoDocumento" ColumnName="tipoDocumento" />
                 <ScalarProperty Name="noDocumento" ColumnName="noDocumento" />
-                <ScalarProperty Name="usuario1" ColumnName="usuario" />
+                <ScalarProperty Name="usuarioLogin" ColumnName="usuario" />
                 <ScalarProperty Name="contrasena" ColumnName="contrasena" />
               </MappingFragment>
             </EntityTypeMapping>
