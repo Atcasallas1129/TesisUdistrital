@@ -219,6 +219,7 @@
     <Content Include="RemoteModel.edmx.diagram">
       <DependentUpon>RemoteModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Login.Master" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="RemoteModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -421,6 +422,13 @@
     </Compile>
     <Compile Include="hechoVictimizante.cs">
       <DependentUpon>RemoteModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Login.Master.cs">
+      <DependentUpon>Login.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.Master.designer.cs">
+      <DependentUpon>Login.Master</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="parentesco.cs">
