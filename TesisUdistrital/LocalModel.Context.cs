@@ -15,10 +15,10 @@ namespace TesisUdistrital
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class DocumentacionDemoEntities : DbContext
+    public partial class DocumentacionDemoLocalEntities : DbContext
     {
-        public DocumentacionDemoEntities()
-            : base("name=DocumentacionDemoEntities")
+        public DocumentacionDemoLocalEntities()
+            : base("name=DocumentacionDemoLocalEntities")
         {
         }
     
@@ -36,11 +36,11 @@ namespace TesisUdistrital
         public virtual DbSet<soporteXRadicado> soporteXRadicado { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<tipoDocumento> tipoDocumento { get; set; }
-        public virtual DbSet<procesoDocumentacion> procesoDocumentacion { get; set; }
-        public virtual DbSet<vw_informacionPersona> vw_informacionPersona { get; set; }
-        public virtual DbSet<vw_consultaCasoDocumentacion> vw_consultaCasoDocumentacion { get; set; }
-        public virtual DbSet<usuarioXradicado> usuarioXradicado { get; set; }
         public virtual DbSet<usuario> usuario { get; set; }
+        public virtual DbSet<procesoDocumentacion> procesoDocumentacion { get; set; }
+        public virtual DbSet<usuarioXradicado> usuarioXradicado { get; set; }
+        public virtual DbSet<vw_consultaCasoDocumentacion> vw_consultaCasoDocumentacion { get; set; }
+        public virtual DbSet<vw_informacionPersona> vw_informacionPersona { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

@@ -216,11 +216,28 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>RemoteModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="LocalModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LocalModel.edmx</DependentUpon>
+      <LastGenOutput>LocalModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="LocalModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LocalModel.edmx</DependentUpon>
+      <LastGenOutput>LocalModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Modulo\Home.aspx" />
     <Content Include="RemoteModel.edmx.diagram">
       <DependentUpon>RemoteModel.edmx</DependentUpon>
     </Content>
     <Content Include="Login.Master" />
+    <EntityDeploy Include="LocalModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>LocalModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="LocalModel.edmx.diagram">
+      <DependentUpon>LocalModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="RemoteModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -406,7 +423,7 @@
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
     <Compile Include="dane.cs">
-      <DependentUpon>RemoteModel.tt</DependentUpon>
+      <DependentUpon>LocalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -416,13 +433,28 @@
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="genero.cs">
-      <DependentUpon>RemoteModel.tt</DependentUpon>
+      <DependentUpon>LocalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="hechoVictimizante.cs">
-      <DependentUpon>RemoteModel.tt</DependentUpon>
+      <DependentUpon>LocalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LocalModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LocalModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LocalModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LocalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LocalModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LocalModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Login.Master.cs">
       <DependentUpon>Login.Master</DependentUpon>
@@ -440,13 +472,13 @@
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
     <Compile Include="parentesco.cs">
-      <DependentUpon>RemoteModel.tt</DependentUpon>
+      <DependentUpon>LocalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="persona.cs">
-      <DependentUpon>RemoteModel.tt</DependentUpon>
+      <DependentUpon>LocalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="procesoDocumentacion.cs">
-      <DependentUpon>RemoteModel.tt</DependentUpon>
+      <DependentUpon>LocalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RemoteModel.Context.cs">
@@ -479,20 +511,29 @@
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
     <Compile Include="soporte.cs">
-      <DependentUpon>RemoteModel.tt</DependentUpon>
+      <DependentUpon>LocalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="soporteXRadicado.cs">
-      <DependentUpon>RemoteModel.tt</DependentUpon>
+      <DependentUpon>LocalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>LocalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>LocalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="sysdiagrams.cs">
-      <DependentUpon>RemoteModel.tt</DependentUpon>
+      <DependentUpon>LocalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="tipoDocumento.cs">
-      <DependentUpon>RemoteModel.tt</DependentUpon>
+      <DependentUpon>LocalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="usuario.cs">
-      <DependentUpon>RemoteModel.tt</DependentUpon>
+      <DependentUpon>LocalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usuarioXradicado.cs">
+      <DependentUpon>LocalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
@@ -502,10 +543,10 @@
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
     <Compile Include="vw_consultaCasoDocumentacion.cs">
-      <DependentUpon>RemoteModel.tt</DependentUpon>
+      <DependentUpon>LocalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="vw_informacionPersona.cs">
-      <DependentUpon>RemoteModel.tt</DependentUpon>
+      <DependentUpon>LocalModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
