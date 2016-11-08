@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DocumentacionDemoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DocumentacionDemoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="dane">
           <Key>
             <PropertyRef Name="codigoDane" />
@@ -165,7 +165,7 @@ warning 6002: The table/view 'DocumentacionDemo.dbo.vw_consultaCasoDocumentacion
             <PropertyRef Name="noDocumentoDestinatario" />
             <PropertyRef Name="fechaNacimientoDestinatario" />
             <PropertyRef Name="GeneroDestinatario" />
-            <PropertyRef Name="Expr1" />
+            <PropertyRef Name="porcentaje" />
           </Key>
           <Property Name="id" Type="bigint" Nullable="false" />
           <Property Name="uniqueIdentifier" Type="uniqueidentifier" Nullable="false" />
@@ -197,7 +197,7 @@ warning 6002: The table/view 'DocumentacionDemo.dbo.vw_consultaCasoDocumentacion
           <Property Name="noDocumentoDestinatario" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="fechaNacimientoDestinatario" Type="date" Nullable="false" />
           <Property Name="GeneroDestinatario" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Expr1" Type="float" Nullable="false" />
+          <Property Name="porcentaje" Type="float" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'DocumentacionDemo.dbo.vw_informacionPersona' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -417,7 +417,7 @@ warning 6002: The table/view 'DocumentacionDemo.dbo.vw_informacionPersona' does 
     [vw_consultaCasoDocumentacion].[noDocumentoDestinatario] AS [noDocumentoDestinatario], 
     [vw_consultaCasoDocumentacion].[fechaNacimientoDestinatario] AS [fechaNacimientoDestinatario], 
     [vw_consultaCasoDocumentacion].[GeneroDestinatario] AS [GeneroDestinatario], 
-    [vw_consultaCasoDocumentacion].[Expr1] AS [Expr1]
+    [vw_consultaCasoDocumentacion].[porcentaje] AS [porcentaje]
     FROM [dbo].[vw_consultaCasoDocumentacion] AS [vw_consultaCasoDocumentacion]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vw_informacionPersona" EntityType="Self.vw_informacionPersona" store:Type="Views" store:Schema="dbo">
@@ -479,8 +479,7 @@ warning 6002: The table/view 'DocumentacionDemo.dbo.vw_informacionPersona' does 
             <End Role="usuario" EntitySet="usuario" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DocumentacionDemoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -629,72 +628,6 @@ warning 6002: The table/view 'DocumentacionDemo.dbo.vw_informacionPersona' does 
           <NavigationProperty Name="persona" Relationship="Self.FK_procesoDocumentacion_persona" FromRole="procesoDocumentacion" ToRole="persona" />
           <NavigationProperty Name="persona1" Relationship="Self.FK_procesoDocumentacion_persona1" FromRole="procesoDocumentacion" ToRole="persona" />
           <NavigationProperty Name="usuario" Relationship="Self.FK_procesoDocumentacion_usuario" FromRole="procesoDocumentacion" ToRole="usuario" />
-        </EntityType>
-        <EntityType Name="vw_consultaCasoDocumentacion">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="uniqueIdentifier" />
-            <PropertyRef Name="rad" />
-            <PropertyRef Name="proceso" />
-            <PropertyRef Name="idPersonaVictima" />
-            <PropertyRef Name="idPersonaUniqueVictima" />
-            <PropertyRef Name="primerNombreVictima" />
-            <PropertyRef Name="segundoNombreVictima" />
-            <PropertyRef Name="primerApellidoVictima" />
-            <PropertyRef Name="segundoApellidoVictima" />
-            <PropertyRef Name="tipoDocumentoVictima" />
-            <PropertyRef Name="noDocumentoVictima" />
-            <PropertyRef Name="fechaNacimientoVictima" />
-            <PropertyRef Name="GeneroVictima" />
-            <PropertyRef Name="nombreHechoVictimizante" />
-            <PropertyRef Name="nombreDeptoOcurrenciaHecho" />
-            <PropertyRef Name="codigoDeptoOcurrenciaHecho" />
-            <PropertyRef Name="nombreMuniOcurrenciaHecho" />
-            <PropertyRef Name="codigoMuniOcurrenciaHecho" />
-            <PropertyRef Name="fechaOcurrenciaHecho" />
-            <PropertyRef Name="idPersonaDestinatario" />
-            <PropertyRef Name="idPersonaUniqueDestinatario" />
-            <PropertyRef Name="primerNombreDestinatario" />
-            <PropertyRef Name="segundoNombreDestinatario" />
-            <PropertyRef Name="primerApellidoDestinatario" />
-            <PropertyRef Name="segundoApellidoDestinatario" />
-            <PropertyRef Name="tipoDocumentoDestinatario" />
-            <PropertyRef Name="noDocumentoDestinatario" />
-            <PropertyRef Name="fechaNacimientoDestinatario" />
-            <PropertyRef Name="GeneroDestinatario" />
-            <PropertyRef Name="Expr1" />
-          </Key>
-          <Property Name="id" Type="Int64" Nullable="false" />
-          <Property Name="uniqueIdentifier" Type="Guid" Nullable="false" />
-          <Property Name="rad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="proceso" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="idPersonaVictima" Type="Int64" Nullable="false" />
-          <Property Name="idPersonaUniqueVictima" Type="Guid" Nullable="false" />
-          <Property Name="primerNombreVictima" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="segundoNombreVictima" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="primerApellidoVictima" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="segundoApellidoVictima" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="tipoDocumentoVictima" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="noDocumentoVictima" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="fechaNacimientoVictima" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="GeneroVictima" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="nombreHechoVictimizante" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="nombreDeptoOcurrenciaHecho" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="codigoDeptoOcurrenciaHecho" Type="Int64" Nullable="false" />
-          <Property Name="nombreMuniOcurrenciaHecho" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="codigoMuniOcurrenciaHecho" Type="Int64" Nullable="false" />
-          <Property Name="fechaOcurrenciaHecho" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="idPersonaDestinatario" Type="Int64" Nullable="false" />
-          <Property Name="idPersonaUniqueDestinatario" Type="Guid" Nullable="false" />
-          <Property Name="primerNombreDestinatario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="segundoNombreDestinatario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="primerApellidoDestinatario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="segundoApellidoDestinatario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="tipoDocumentoDestinatario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="noDocumentoDestinatario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="fechaNacimientoDestinatario" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="GeneroDestinatario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Expr1" Type="Double" Nullable="false" />
         </EntityType>
         <EntityType Name="vw_informacionPersona">
           <Key>
@@ -864,7 +797,6 @@ warning 6002: The table/view 'DocumentacionDemo.dbo.vw_informacionPersona' does 
           <EntitySet Name="tipoDocumento" EntityType="Self.tipoDocumento" />
           <EntitySet Name="usuario" EntityType="Self.usuario" />
           <EntitySet Name="procesoDocumentacion" EntityType="Self.procesoDocumentacion" />
-          <EntitySet Name="vw_consultaCasoDocumentacion" EntityType="Self.vw_consultaCasoDocumentacion" />
           <EntitySet Name="vw_informacionPersona" EntityType="Self.vw_informacionPersona" />
           <AssociationSet Name="FK_procesoDocumentacion_dane" Association="Self.FK_procesoDocumentacion_dane">
             <End Role="dane" EntitySet="dane" />
@@ -910,7 +842,74 @@ warning 6002: The table/view 'DocumentacionDemo.dbo.vw_informacionPersona' does 
             <End Role="usuario" EntitySet="usuario" />
             <End Role="procesoDocumentacion" EntitySet="procesoDocumentacion" />
           </AssociationSet>
+          <EntitySet Name="vw_consultaCasoDocumentacion" EntityType="DocumentacionDemoModel.vw_consultaCasoDocumentacion" />
         </EntityContainer>
+        <EntityType Name="vw_consultaCasoDocumentacion">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="uniqueIdentifier" />
+            <PropertyRef Name="rad" />
+            <PropertyRef Name="proceso" />
+            <PropertyRef Name="idPersonaVictima" />
+            <PropertyRef Name="idPersonaUniqueVictima" />
+            <PropertyRef Name="primerNombreVictima" />
+            <PropertyRef Name="segundoNombreVictima" />
+            <PropertyRef Name="primerApellidoVictima" />
+            <PropertyRef Name="segundoApellidoVictima" />
+            <PropertyRef Name="tipoDocumentoVictima" />
+            <PropertyRef Name="noDocumentoVictima" />
+            <PropertyRef Name="fechaNacimientoVictima" />
+            <PropertyRef Name="GeneroVictima" />
+            <PropertyRef Name="nombreHechoVictimizante" />
+            <PropertyRef Name="nombreDeptoOcurrenciaHecho" />
+            <PropertyRef Name="codigoDeptoOcurrenciaHecho" />
+            <PropertyRef Name="nombreMuniOcurrenciaHecho" />
+            <PropertyRef Name="codigoMuniOcurrenciaHecho" />
+            <PropertyRef Name="fechaOcurrenciaHecho" />
+            <PropertyRef Name="idPersonaDestinatario" />
+            <PropertyRef Name="idPersonaUniqueDestinatario" />
+            <PropertyRef Name="primerNombreDestinatario" />
+            <PropertyRef Name="segundoNombreDestinatario" />
+            <PropertyRef Name="primerApellidoDestinatario" />
+            <PropertyRef Name="segundoApellidoDestinatario" />
+            <PropertyRef Name="tipoDocumentoDestinatario" />
+            <PropertyRef Name="noDocumentoDestinatario" />
+            <PropertyRef Name="fechaNacimientoDestinatario" />
+            <PropertyRef Name="GeneroDestinatario" />
+            <PropertyRef Name="porcentaje" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" />
+          <Property Name="uniqueIdentifier" Type="Guid" Nullable="false" />
+          <Property Name="rad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="proceso" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="idPersonaVictima" Type="Int64" Nullable="false" />
+          <Property Name="idPersonaUniqueVictima" Type="Guid" Nullable="false" />
+          <Property Name="primerNombreVictima" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="segundoNombreVictima" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="primerApellidoVictima" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="segundoApellidoVictima" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tipoDocumentoVictima" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="noDocumentoVictima" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fechaNacimientoVictima" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="GeneroVictima" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="nombreHechoVictimizante" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="nombreDeptoOcurrenciaHecho" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="codigoDeptoOcurrenciaHecho" Type="Int64" Nullable="false" />
+          <Property Name="nombreMuniOcurrenciaHecho" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="codigoMuniOcurrenciaHecho" Type="Int64" Nullable="false" />
+          <Property Name="fechaOcurrenciaHecho" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="idPersonaDestinatario" Type="Int64" Nullable="false" />
+          <Property Name="idPersonaUniqueDestinatario" Type="Guid" Nullable="false" />
+          <Property Name="primerNombreDestinatario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="segundoNombreDestinatario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="primerApellidoDestinatario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="segundoApellidoDestinatario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tipoDocumentoDestinatario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="noDocumentoDestinatario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fechaNacimientoDestinatario" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="GeneroDestinatario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="porcentaje" Type="Double" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1043,43 +1042,6 @@ warning 6002: The table/view 'DocumentacionDemo.dbo.vw_informacionPersona' does 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vw_consultaCasoDocumentacion">
-            <EntityTypeMapping TypeName="DocumentacionDemoModel.vw_consultaCasoDocumentacion">
-              <MappingFragment StoreEntitySet="vw_consultaCasoDocumentacion">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="uniqueIdentifier" ColumnName="uniqueIdentifier" />
-                <ScalarProperty Name="rad" ColumnName="rad" />
-                <ScalarProperty Name="proceso" ColumnName="proceso" />
-                <ScalarProperty Name="idPersonaVictima" ColumnName="idPersonaVictima" />
-                <ScalarProperty Name="idPersonaUniqueVictima" ColumnName="idPersonaUniqueVictima" />
-                <ScalarProperty Name="primerNombreVictima" ColumnName="primerNombreVictima" />
-                <ScalarProperty Name="segundoNombreVictima" ColumnName="segundoNombreVictima" />
-                <ScalarProperty Name="primerApellidoVictima" ColumnName="primerApellidoVictima" />
-                <ScalarProperty Name="segundoApellidoVictima" ColumnName="segundoApellidoVictima" />
-                <ScalarProperty Name="tipoDocumentoVictima" ColumnName="tipoDocumentoVictima" />
-                <ScalarProperty Name="noDocumentoVictima" ColumnName="noDocumentoVictima" />
-                <ScalarProperty Name="fechaNacimientoVictima" ColumnName="fechaNacimientoVictima" />
-                <ScalarProperty Name="GeneroVictima" ColumnName="GeneroVictima" />
-                <ScalarProperty Name="nombreHechoVictimizante" ColumnName="nombreHechoVictimizante" />
-                <ScalarProperty Name="nombreDeptoOcurrenciaHecho" ColumnName="nombreDeptoOcurrenciaHecho" />
-                <ScalarProperty Name="codigoDeptoOcurrenciaHecho" ColumnName="codigoDeptoOcurrenciaHecho" />
-                <ScalarProperty Name="nombreMuniOcurrenciaHecho" ColumnName="nombreMuniOcurrenciaHecho" />
-                <ScalarProperty Name="codigoMuniOcurrenciaHecho" ColumnName="codigoMuniOcurrenciaHecho" />
-                <ScalarProperty Name="fechaOcurrenciaHecho" ColumnName="fechaOcurrenciaHecho" />
-                <ScalarProperty Name="idPersonaDestinatario" ColumnName="idPersonaDestinatario" />
-                <ScalarProperty Name="idPersonaUniqueDestinatario" ColumnName="idPersonaUniqueDestinatario" />
-                <ScalarProperty Name="primerNombreDestinatario" ColumnName="primerNombreDestinatario" />
-                <ScalarProperty Name="segundoNombreDestinatario" ColumnName="segundoNombreDestinatario" />
-                <ScalarProperty Name="primerApellidoDestinatario" ColumnName="primerApellidoDestinatario" />
-                <ScalarProperty Name="segundoApellidoDestinatario" ColumnName="segundoApellidoDestinatario" />
-                <ScalarProperty Name="tipoDocumentoDestinatario" ColumnName="tipoDocumentoDestinatario" />
-                <ScalarProperty Name="noDocumentoDestinatario" ColumnName="noDocumentoDestinatario" />
-                <ScalarProperty Name="fechaNacimientoDestinatario" ColumnName="fechaNacimientoDestinatario" />
-                <ScalarProperty Name="GeneroDestinatario" ColumnName="GeneroDestinatario" />
-                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="vw_informacionPersona">
             <EntityTypeMapping TypeName="DocumentacionDemoModel.vw_informacionPersona">
               <MappingFragment StoreEntitySet="vw_informacionPersona">
@@ -1093,6 +1055,43 @@ warning 6002: The table/view 'DocumentacionDemo.dbo.vw_informacionPersona' does 
                 <ScalarProperty Name="noDocumento" ColumnName="noDocumento" />
                 <ScalarProperty Name="fechaNacimiento" ColumnName="fechaNacimiento" />
                 <ScalarProperty Name="Genero" ColumnName="Genero" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_consultaCasoDocumentacion">
+            <EntityTypeMapping TypeName="DocumentacionDemoModel.vw_consultaCasoDocumentacion">
+              <MappingFragment StoreEntitySet="vw_consultaCasoDocumentacion">
+                <ScalarProperty Name="porcentaje" ColumnName="porcentaje" />
+                <ScalarProperty Name="GeneroDestinatario" ColumnName="GeneroDestinatario" />
+                <ScalarProperty Name="fechaNacimientoDestinatario" ColumnName="fechaNacimientoDestinatario" />
+                <ScalarProperty Name="noDocumentoDestinatario" ColumnName="noDocumentoDestinatario" />
+                <ScalarProperty Name="tipoDocumentoDestinatario" ColumnName="tipoDocumentoDestinatario" />
+                <ScalarProperty Name="segundoApellidoDestinatario" ColumnName="segundoApellidoDestinatario" />
+                <ScalarProperty Name="primerApellidoDestinatario" ColumnName="primerApellidoDestinatario" />
+                <ScalarProperty Name="segundoNombreDestinatario" ColumnName="segundoNombreDestinatario" />
+                <ScalarProperty Name="primerNombreDestinatario" ColumnName="primerNombreDestinatario" />
+                <ScalarProperty Name="idPersonaUniqueDestinatario" ColumnName="idPersonaUniqueDestinatario" />
+                <ScalarProperty Name="idPersonaDestinatario" ColumnName="idPersonaDestinatario" />
+                <ScalarProperty Name="fechaOcurrenciaHecho" ColumnName="fechaOcurrenciaHecho" />
+                <ScalarProperty Name="codigoMuniOcurrenciaHecho" ColumnName="codigoMuniOcurrenciaHecho" />
+                <ScalarProperty Name="nombreMuniOcurrenciaHecho" ColumnName="nombreMuniOcurrenciaHecho" />
+                <ScalarProperty Name="codigoDeptoOcurrenciaHecho" ColumnName="codigoDeptoOcurrenciaHecho" />
+                <ScalarProperty Name="nombreDeptoOcurrenciaHecho" ColumnName="nombreDeptoOcurrenciaHecho" />
+                <ScalarProperty Name="nombreHechoVictimizante" ColumnName="nombreHechoVictimizante" />
+                <ScalarProperty Name="GeneroVictima" ColumnName="GeneroVictima" />
+                <ScalarProperty Name="fechaNacimientoVictima" ColumnName="fechaNacimientoVictima" />
+                <ScalarProperty Name="noDocumentoVictima" ColumnName="noDocumentoVictima" />
+                <ScalarProperty Name="tipoDocumentoVictima" ColumnName="tipoDocumentoVictima" />
+                <ScalarProperty Name="segundoApellidoVictima" ColumnName="segundoApellidoVictima" />
+                <ScalarProperty Name="primerApellidoVictima" ColumnName="primerApellidoVictima" />
+                <ScalarProperty Name="segundoNombreVictima" ColumnName="segundoNombreVictima" />
+                <ScalarProperty Name="primerNombreVictima" ColumnName="primerNombreVictima" />
+                <ScalarProperty Name="idPersonaUniqueVictima" ColumnName="idPersonaUniqueVictima" />
+                <ScalarProperty Name="idPersonaVictima" ColumnName="idPersonaVictima" />
+                <ScalarProperty Name="proceso" ColumnName="proceso" />
+                <ScalarProperty Name="rad" ColumnName="rad" />
+                <ScalarProperty Name="uniqueIdentifier" ColumnName="uniqueIdentifier" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

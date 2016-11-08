@@ -36,7 +36,7 @@ namespace TesisUdistrital
         public virtual DbSet<tipoDocumento> tipoDocumento { get; set; }
         public virtual DbSet<usuario> usuario { get; set; }
         public virtual DbSet<procesoDocumentacion> procesoDocumentacion { get; set; }
-        public virtual DbSet<vw_consultaCasoDocumentacion> vw_consultaCasoDocumentacion { get; set; }
         public virtual DbSet<vw_informacionPersona> vw_informacionPersona { get; set; }
+        public virtual DbSet<vw_consultaCasoDocumentacion> vw_consultaCasoDocumentacion { get; set; }
     }
 }

@@ -216,6 +216,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>RemoteModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Modulo\Home.aspx" />
     <Content Include="RemoteModel.edmx.diagram">
       <DependentUpon>RemoteModel.edmx</DependentUpon>
     </Content>
@@ -431,6 +432,13 @@
       <DependentUpon>Login.Master</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Modulo\Home.aspx.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modulo\Home.aspx.designer.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
     <Compile Include="parentesco.cs">
       <DependentUpon>RemoteModel.tt</DependentUpon>
     </Compile>

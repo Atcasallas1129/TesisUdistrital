@@ -44,6 +44,6 @@ namespace TesisUdistrital
         public string noDocumentoDestinatario { get; set; }
         public System.DateTime fechaNacimientoDestinatario { get; set; }
         public string GeneroDestinatario { get; set; }
-        public double Expr1 { get; set; }
+        public double porcentaje { get; set; }
     }
 }

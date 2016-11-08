@@ -16,7 +16,6 @@
         <EntityTypeShape EntityType="DocumentacionDemoModel.tipoDocumento" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DocumentacionDemoModel.usuario" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DocumentacionDemoModel.procesoDocumentacion" Width="1.5" PointX="5.25" PointY="10.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DocumentacionDemoModel.vw_consultaCasoDocumentacion" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DocumentacionDemoModel.vw_informacionPersona" Width="1.5" PointX="7.75" PointY="8.75" IsExpanded="true" />
         <AssociationConnector Association="DocumentacionDemoModel.FK_procesoDocumentacion_dane" ManuallyRouted="false" />
         <AssociationConnector Association="DocumentacionDemoModel.FK_persona_genero" ManuallyRouted="false" />
@@ -29,6 +28,7 @@
         <AssociationConnector Association="DocumentacionDemoModel.FK_soporteXRadicado_soporte" ManuallyRouted="false" />
         <AssociationConnector Association="DocumentacionDemoModel.FK_usuario_tipoDocumento" ManuallyRouted="false" />
         <AssociationConnector Association="DocumentacionDemoModel.FK_procesoDocumentacion_usuario" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DocumentacionDemoModel.vw_consultaCasoDocumentacion" Width="1.5" PointX="8.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
