@@ -29,6 +29,8 @@
         <AssociationConnector Association="DocumentacionDemoModel.FK_usuario_tipoDocumento" ManuallyRouted="false" />
         <AssociationConnector Association="DocumentacionDemoModel.FK_procesoDocumentacion_usuario" ManuallyRouted="false" />
         <EntityTypeShape EntityType="DocumentacionDemoModel.vw_consultaCasoDocumentacion" Width="1.5" PointX="8.375" PointY="0.75" />
+        <EntityTypeShape EntityType="DocumentacionDemoModel.usuarioXradicado" Width="1.5" PointX="5.25" PointY="16.125" />
+        <AssociationConnector Association="DocumentacionDemoModel.FK_usuarioXradicado_usuario" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

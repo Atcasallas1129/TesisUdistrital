@@ -132,6 +132,24 @@ warning 6002: The table/view 'DocumentacionDemo.dbo.procesoDocumentacion' does n
           <Property Name="contrasena" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'DocumentacionDemo.dbo.usuarioXradicado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="usuarioXradicado">
+          <Key>
+            <PropertyRef Name="idAsignacion" />
+            <PropertyRef Name="rad" />
+            <PropertyRef Name="proceso" />
+            <PropertyRef Name="estado" />
+            <PropertyRef Name="idusuario" />
+            <PropertyRef Name="fechaAsignacion" />
+          </Key>
+          <Property Name="idAsignacion" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rad" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="proceso" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+          <Property Name="idusuario" Type="bigint" Nullable="false" />
+          <Property Name="fechaAsignacion" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'DocumentacionDemo.dbo.vw_consultaCasoDocumentacion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vw_consultaCasoDocumentacion">
           <Key>
@@ -357,6 +375,49 @@ warning 6002: The table/view 'DocumentacionDemo.dbo.vw_informacionPersona' does 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_usuarioXradicado_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="usuarioXradicado" Type="Self.usuarioXradicado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuarioXradicado">
+              <PropertyRef Name="idusuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="DocumentacionDemoModelStoreContainer">
           <EntitySet Name="dane" EntityType="Self.dane" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="genero" EntityType="Self.genero" Schema="dbo" store:Type="Tables" />
@@ -384,6 +445,16 @@ warning 6002: The table/view 'DocumentacionDemo.dbo.vw_informacionPersona' does 
     [procesoDocumentacion].[idPersonaVictima] AS [idPersonaVictima], 
     [procesoDocumentacion].[idPersonaDestinatario] AS [idPersonaDestinatario]
     FROM [dbo].[procesoDocumentacion] AS [procesoDocumentacion]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="usuarioXradicado" EntityType="Self.usuarioXradicado" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [usuarioXradicado].[idAsignacion] AS [idAsignacion], 
+    [usuarioXradicado].[rad] AS [rad], 
+    [usuarioXradicado].[proceso] AS [proceso], 
+    [usuarioXradicado].[estado] AS [estado], 
+    [usuarioXradicado].[idusuario] AS [idusuario], 
+    [usuarioXradicado].[fechaAsignacion] AS [fechaAsignacion]
+    FROM [dbo].[usuarioXradicado] AS [usuarioXradicado]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vw_consultaCasoDocumentacion" EntityType="Self.vw_consultaCasoDocumentacion" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -477,6 +548,10 @@ warning 6002: The table/view 'DocumentacionDemo.dbo.vw_informacionPersona' does 
           <AssociationSet Name="FK_usuario_tipoDocumento" Association="Self.FK_usuario_tipoDocumento">
             <End Role="tipoDocumento" EntitySet="tipoDocumento" />
             <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuarioXradicado_usuario" Association="Self.FK_usuarioXradicado_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="usuarioXradicado" EntitySet="usuarioXradicado" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -595,6 +670,7 @@ warning 6002: The table/view 'DocumentacionDemo.dbo.vw_informacionPersona' does 
           <Property Name="contrasena" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="tipoDocumento1" Relationship="Self.FK_usuario_tipoDocumento" FromRole="usuario" ToRole="tipoDocumento" />
           <NavigationProperty Name="procesoDocumentacion" Relationship="Self.FK_procesoDocumentacion_usuario" FromRole="usuario" ToRole="procesoDocumentacion" />
+          <NavigationProperty Name="usuarioXradicado" Relationship="DocumentacionDemoModel.FK_usuarioXradicado_usuario" FromRole="usuario" ToRole="usuarioXradicado" />
         </EntityType>
         <EntityType Name="procesoDocumentacion">
           <Key>
@@ -843,6 +919,41 @@ warning 6002: The table/view 'DocumentacionDemo.dbo.vw_informacionPersona' does 
             <End Role="procesoDocumentacion" EntitySet="procesoDocumentacion" />
           </AssociationSet>
           <EntitySet Name="vw_consultaCasoDocumentacion" EntityType="DocumentacionDemoModel.vw_consultaCasoDocumentacion" />
+          <EntitySet Name="usuarioXradicado" EntityType="DocumentacionDemoModel.usuarioXradicado" />
+          <AssociationSet Name="FK_usuarioXradicado_usuario" Association="DocumentacionDemoModel.FK_usuarioXradicado_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="usuarioXradicado" EntitySet="usuarioXradicado" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(DocumentacionDemoModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(DocumentacionDemoModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
         <EntityType Name="vw_consultaCasoDocumentacion">
           <Key>
@@ -910,6 +1021,46 @@ warning 6002: The table/view 'DocumentacionDemo.dbo.vw_informacionPersona' does 
           <Property Name="GeneroDestinatario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="porcentaje" Type="Double" Nullable="false" />
         </EntityType>
+        <EntityType Name="usuarioXradicado">
+          <Key>
+            <PropertyRef Name="idAsignacion" />
+            <PropertyRef Name="rad" />
+            <PropertyRef Name="proceso" />
+            <PropertyRef Name="estado" />
+            <PropertyRef Name="idusuario" />
+            <PropertyRef Name="fechaAsignacion" />
+          </Key>
+          <Property Name="idAsignacion" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rad" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="proceso" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <Property Name="idusuario" Type="Int64" Nullable="false" />
+          <Property Name="fechaAsignacion" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="usuario" Relationship="DocumentacionDemoModel.FK_usuarioXradicado_usuario" FromRole="usuarioXradicado" ToRole="usuario" />
+        </EntityType>
+        <Association Name="FK_usuarioXradicado_usuario">
+          <End Type="DocumentacionDemoModel.usuario" Role="usuario" Multiplicity="1" />
+          <End Type="DocumentacionDemoModel.usuarioXradicado" Role="usuarioXradicado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuarioXradicado">
+              <PropertyRef Name="idusuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1095,6 +1246,42 @@ warning 6002: The table/view 'DocumentacionDemo.dbo.vw_informacionPersona' does 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="usuarioXradicado">
+            <EntityTypeMapping TypeName="DocumentacionDemoModel.usuarioXradicado">
+              <MappingFragment StoreEntitySet="usuarioXradicado">
+                <ScalarProperty Name="fechaAsignacion" ColumnName="fechaAsignacion" />
+                <ScalarProperty Name="idusuario" ColumnName="idusuario" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="proceso" ColumnName="proceso" />
+                <ScalarProperty Name="rad" ColumnName="rad" />
+                <ScalarProperty Name="idAsignacion" ColumnName="idAsignacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="DocumentacionDemoModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="DocumentacionDemoModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="DocumentacionDemoModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="DocumentacionDemoModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DocumentacionDemoModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="DocumentacionDemoModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DocumentacionDemoModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="DocumentacionDemoModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="DocumentacionDemoModel.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
