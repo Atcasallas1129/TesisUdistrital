@@ -3,6 +3,7 @@
     <asp:Panel ID="PnlMensajes" runat="server">
     </asp:Panel>
     <div class="row">
+        <h2>Módulo de Descarga de Información</h2>
         <div class="col-lg-12">
             <asp:PlaceHolder runat="server" ID="ErrorMessage" Visible="true">
                         <asp:Panel ID="panelMensajes" runat="server"></asp:Panel>
