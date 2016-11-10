@@ -16,38 +16,46 @@ namespace TesisUdistrital.Modulo
         private Int64 idUsuarioLogeado;
         protected void Page_Load(object sender, EventArgs e)
         {
-            idUsuarioLogeado = (Session["usuarioLogeado"] as usuario).id;
+            PnlMensajes.Visible = false;
             try
             {
-                DocumentacionDemoLocalEntities contextoL = new DocumentacionDemoLocalEntities();
-                usuario usuarioL = contextoL.usuario.FirstOrDefault(X => X.id == idUsuarioLogeado);
-                if (usuarioL == null)
+                idUsuarioLogeado = (Session["usuarioLogeado"] as usuario).id;
+                try
                 {
-                    DocumentacionDemoEntities contextoR = new DocumentacionDemoEntities();
-                    usuario usuarioR = contextoR.usuario.FirstOrDefault(X => X.id == idUsuarioLogeado);
-                    usuario nvoUsuarioL = new usuario();
-                    nvoUsuarioL.id = usuarioR.id;
-                    nvoUsuarioL.primerNombre = usuarioR.primerNombre;
-                    nvoUsuarioL.segundoNombre = usuarioR.segundoNombre;
-                    nvoUsuarioL.primerApellido = usuarioR.primerApellido;
-                    nvoUsuarioL.segundoApellido = usuarioR.segundoApellido;
-                    nvoUsuarioL.tipoDocumento = usuarioR.tipoDocumento;
-                    nvoUsuarioL.noDocumento = usuarioR.noDocumento;
-                    nvoUsuarioL.usuarioLogin = usuarioR.usuarioLogin;
-                    nvoUsuarioL.contrasena = usuarioR.contrasena;
-                    contextoL.usuario.Add(nvoUsuarioL);
-                    contextoL.SaveChanges();
+                    DocumentacionDemoLocalEntities contextoL = new DocumentacionDemoLocalEntities();
+                    usuario usuarioL = contextoL.usuario.FirstOrDefault(X => X.id == idUsuarioLogeado);
+                    if (usuarioL == null)
+                    {
+                        DocumentacionDemoEntities contextoR = new DocumentacionDemoEntities();
+                        usuario usuarioR = contextoR.usuario.FirstOrDefault(X => X.id == idUsuarioLogeado);
+                        usuario nvoUsuarioL = new usuario();
+                        nvoUsuarioL.id = usuarioR.id;
+                        nvoUsuarioL.primerNombre = usuarioR.primerNombre;
+                        nvoUsuarioL.segundoNombre = usuarioR.segundoNombre;
+                        nvoUsuarioL.primerApellido = usuarioR.primerApellido;
+                        nvoUsuarioL.segundoApellido = usuarioR.segundoApellido;
+                        nvoUsuarioL.tipoDocumento = usuarioR.tipoDocumento;
+                        nvoUsuarioL.noDocumento = usuarioR.noDocumento;
+                        nvoUsuarioL.usuarioLogin = usuarioR.usuarioLogin;
+                        nvoUsuarioL.contrasena = usuarioR.contrasena;
+                        contextoL.usuario.Add(nvoUsuarioL);
+                        contextoL.SaveChanges();
+                    }
+                }
+                catch (SystemException ex)
+                {
+                    PnlMensajes.CssClass = "alert alert-danger";
+                    Label textoError = new Label();
+                    textoError.Text = "Error en la creación del usuario en sistema local, descripcion del mensaje: "+ex.ToString();
+                    PnlMensajes.Controls.Add(textoError);
+                    PnlMensajes.Visible = true;
                 }
             }
-            catch (SystemException ex)
+            catch
             {
-                PnlMensajes.CssClass = "alert alert-success";
-                Label textoError = new Label();
-                textoError.Text = "Se ha realizado la migración de los casos solicitados, ahora puede acceder a ellos desde el sistema Local";
-                PnlMensajes.Controls.Add(textoError);
+                Response.Redirect("~/Account/Login.aspx", false);
             }
         }
-
         protected void LinqDataSource_Selecting(object sender, LinqDataSourceSelectEventArgs e)
         {
             try
@@ -138,11 +146,13 @@ namespace TesisUdistrital.Modulo
                 Label textoError = new Label();
                 textoError.Text = "Error: No es posible establecer conexion con el sistema, por favor intente mas tarde.";
                 panelMensajes.Controls.Add(textoError);
+                PnlMensajes.Visible = true;
             }
         }
 
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
+            PnlMensajes.Visible = false;
             try
             {
                 dgvHistoricoNna.DataBind();
@@ -153,6 +163,7 @@ namespace TesisUdistrital.Modulo
                 Label textoError = new Label();
                 textoError.Text = "Error: No es posible establecer conexion con el sistema, por favor intente mas tarde.";
                 panelMensajes.Controls.Add(textoError);
+                PnlMensajes.Visible = true;
             }
         }
         protected void dgvHistoricoNna_SelectedIndexChanged(object sender, EventArgs e)
@@ -210,19 +221,23 @@ namespace TesisUdistrital.Modulo
                 foreach(var personaR in personaInsertar)
                 {
                     DocumentacionDemoLocalEntities contextoL = new DocumentacionDemoLocalEntities();
-                    persona nvaPersona = new persona();
-                    nvaPersona.idPersona = personaR.idPersona;
-                    nvaPersona.idPersonaUnique = personaR.idPersonaUnique;
-                    nvaPersona.primerNombre = personaR.primerNombre;
-                    nvaPersona.segundoNombre = personaR.segundoNombre;
-                    nvaPersona.primerApellido = personaR.primerApellido;
-                    nvaPersona.segundoApellido = personaR.segundoApellido;
-                    nvaPersona.tipoDocumento = personaR.tipoDocumento;
-                    nvaPersona.noDocumento = personaR.noDocumento;
-                    nvaPersona.fechaNacimiento = personaR.fechaNacimiento;
-                    nvaPersona.genero = personaR.genero;
-                    contextoL.persona.Add(nvaPersona);
-                    contextoL.SaveChanges();
+                    persona prePersona = contextoL.persona.FirstOrDefault(X => X.idPersona == personaR.idPersona);
+                    if(prePersona == null)
+                    {
+                        persona nvaPersona = new persona();
+                        nvaPersona.idPersona = personaR.idPersona;
+                        nvaPersona.idPersonaUnique = personaR.idPersonaUnique;
+                        nvaPersona.primerNombre = personaR.primerNombre;
+                        nvaPersona.segundoNombre = personaR.segundoNombre;
+                        nvaPersona.primerApellido = personaR.primerApellido;
+                        nvaPersona.segundoApellido = personaR.segundoApellido;
+                        nvaPersona.tipoDocumento = personaR.tipoDocumento;
+                        nvaPersona.noDocumento = personaR.noDocumento;
+                        nvaPersona.fechaNacimiento = personaR.fechaNacimiento;
+                        nvaPersona.genero = personaR.genero;
+                        contextoL.persona.Add(nvaPersona);
+                        contextoL.SaveChanges();
+                    }
                 }
                 ////buscar todos los registros en la base de datos de los radicados seleccionados
                 /////insertar los casos en la base Local
@@ -237,21 +252,25 @@ namespace TesisUdistrital.Modulo
                     foreach (var registroInsertar in casoInsertar)
                     {
                         DocumentacionDemoLocalEntities contextoL = new DocumentacionDemoLocalEntities();
-                        procesoDocumentacion nvoRegistro = new procesoDocumentacion();
-                        nvoRegistro.uniqueIdentifier = registroInsertar.uniqueIdentifier;
-                        nvoRegistro.rad = registroInsertar.rad;
-                        nvoRegistro.proceso = registroInsertar.proceso;
-                        nvoRegistro.hechoVictimizante = registroInsertar.hechoVictimizante;
-                        nvoRegistro.daneOcurrenciaHecho = registroInsertar.daneOcurrenciaHecho;
-                        nvoRegistro.fechaOcurrenciaHecho = registroInsertar.fechaOcurrenciaHecho;
-                        nvoRegistro.parentesco = registroInsertar.parentesco;
-                        nvoRegistro.porcentaje = registroInsertar.porcentaje;
-                        nvoRegistro.usuarioModificacion = (Session["usuarioLogeado"] as usuario).id; 
-                        nvoRegistro.fechaModificacion = DateTime.Now;
-                        nvoRegistro.idPersonaVictima = registroInsertar.idPersonaVictima;
-                        nvoRegistro.idPersonaDestinatario = registroInsertar.idPersonaDestinatario;
-                        contextoL.procesoDocumentacion.Add(nvoRegistro);
-                        contextoL.SaveChanges();
+                        procesoDocumentacion preCargueRegistro = contextoL.procesoDocumentacion.FirstOrDefault(X => X.uniqueIdentifier == registroInsertar.uniqueIdentifier);
+                        if (preCargueRegistro == null)
+                        {
+                            procesoDocumentacion nvoRegistro = new procesoDocumentacion();
+                            nvoRegistro.uniqueIdentifier = registroInsertar.uniqueIdentifier;
+                            nvoRegistro.rad = registroInsertar.rad;
+                            nvoRegistro.proceso = registroInsertar.proceso;
+                            nvoRegistro.hechoVictimizante = registroInsertar.hechoVictimizante;
+                            nvoRegistro.daneOcurrenciaHecho = registroInsertar.daneOcurrenciaHecho;
+                            nvoRegistro.fechaOcurrenciaHecho = registroInsertar.fechaOcurrenciaHecho;
+                            nvoRegistro.parentesco = registroInsertar.parentesco;
+                            nvoRegistro.porcentaje = registroInsertar.porcentaje;
+                            nvoRegistro.usuarioModificacion = (Session["usuarioLogeado"] as usuario).id;
+                            nvoRegistro.fechaModificacion = DateTime.Now;
+                            nvoRegistro.idPersonaVictima = registroInsertar.idPersonaVictima;
+                            nvoRegistro.idPersonaDestinatario = registroInsertar.idPersonaDestinatario;
+                            contextoL.procesoDocumentacion.Add(nvoRegistro);
+                            contextoL.SaveChanges();
+                        }
                     }
                     usuarioXradicado nvaAsignacion = new usuarioXradicado();
                     nvaAsignacion.rad = radicadoR;
@@ -266,6 +285,7 @@ namespace TesisUdistrital.Modulo
                 Label textoError = new Label();
                 textoError.Text = "Ha culminado la migración de datos al sistema Local, ahora puede acceder a ellos desde el sistema local";
                 PnlMensajes.Controls.Add(textoError);
+                PnlMensajes.Visible = true;
             }
             catch(SystemException ex)
             {
@@ -273,6 +293,7 @@ namespace TesisUdistrital.Modulo
                 Label textoError = new Label();
                 textoError.Text = ex.ToString();
                 PnlMensajes.Controls.Add(textoError);
+                PnlMensajes.Visible = true;
             }            
             //2. buscar los Id, y retornar los radicados unicos
             //3. Cargar a la base local

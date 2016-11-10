@@ -226,6 +226,7 @@
       <DependentUpon>LocalModel.edmx</DependentUpon>
       <LastGenOutput>LocalModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Modulo\consultaCasoDocumentacion.aspx" />
     <Content Include="Modulo\Home.aspx" />
     <Content Include="RemoteModel.edmx.diagram">
       <DependentUpon>RemoteModel.edmx</DependentUpon>
@@ -465,6 +466,13 @@
       <DependentUpon>Login.Master</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Modulo\consultaCasoDocumentacion.aspx.cs">
+      <DependentUpon>consultaCasoDocumentacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modulo\consultaCasoDocumentacion.aspx.designer.cs">
+      <DependentUpon>consultaCasoDocumentacion.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Modulo\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
