@@ -11,7 +11,9 @@ namespace TesisUdistrital.Account
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Session.Abandon();
+            Response.Cookies.Add(new HttpCookie("ASP.NET_SessionId", ""));
+            Response.Redirect("~/Account/Login.aspx",false);
         }
     }
 }

@@ -48,7 +48,7 @@
                     <asp:DropDownList ID="ddlIdCasos" runat="server" Visible =" false"></asp:DropDownList>
                 </div>
                 <div class="col-lg-12" style="margin-top:15px; margin-bottom:15px;">
-                    <asp:GridView ID="dgvHistoricoNna" runat="server" DataKeyNames="IdRegistro" CssClass="table table-hover table-condensed" AllowPaging="True" DataSourceID="LinqDataSource" AutoGenerateColumns="False" PageSize="25" BorderStyle="None" BorderWidth="1px" ForeColor="Black" GridLines="Horizontal" OnSelectedIndexChanged="dgvHistoricoNna_SelectedIndexChanged">
+                    <asp:GridView ID="dgvHistoricoNna" runat="server" DataKeyNames="IdRegistro" CssClass="table table-hover table-condensed" AllowPaging="True" DataSourceID="LinqDataSource" AutoGenerateColumns="False" PageSize="25" BorderStyle="None" BorderWidth="1px" ForeColor="Black" GridLines="Horizontal" EmptyDataText="No hay resultados de la búsqueda. Por favor ingrese parámetros de búsqueda." OnSelectedIndexChanged="dgvHistoricoNna_SelectedIndexChanged">
                         <Columns>
                             <asp:TemplateField>
                                 <ItemTemplate>
