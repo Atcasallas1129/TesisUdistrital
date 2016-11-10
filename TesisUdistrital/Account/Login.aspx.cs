@@ -29,7 +29,7 @@ namespace TesisUdistrital.Account
                     DocumentacionDemoEntities contexto = new DocumentacionDemoEntities();
                     usuario idusuario = contexto.usuario.SingleOrDefault(X => X.usuarioLogin.Equals(usuario) && X.contrasena.Equals(contrasena));
                     Session["usuarioLogeado"] = idusuario;
-                    Response.Redirect("~/Modulo/Home.aspx", true);
+                    Response.Redirect("~/Modulo/Home.aspx",false);
                 }
                 else
                 {

@@ -14,22 +14,22 @@
         <EntityTypeShape EntityType="DocumentacionDemoLocalModel.soporteXRadicado" Width="1.5" PointX="5.25" PointY="6.25" />
         <EntityTypeShape EntityType="DocumentacionDemoLocalModel.sysdiagrams" Width="1.5" PointX="8.75" PointY="0.75" />
         <EntityTypeShape EntityType="DocumentacionDemoLocalModel.tipoDocumento" Width="1.5" PointX="0.75" PointY="6.75" />
-        <EntityTypeShape EntityType="DocumentacionDemoLocalModel.usuario" Width="1.5" PointX="3" PointY="10.625" />
-        <EntityTypeShape EntityType="DocumentacionDemoLocalModel.procesoDocumentacion" Width="1.5" PointX="8.25" PointY="7.5" />
-        <EntityTypeShape EntityType="DocumentacionDemoLocalModel.usuarioXradicado" Width="1.5" PointX="5.25" PointY="11.125" />
         <EntityTypeShape EntityType="DocumentacionDemoLocalModel.vw_consultaCasoDocumentacion" Width="1.5" PointX="10.75" PointY="0.75" />
         <EntityTypeShape EntityType="DocumentacionDemoLocalModel.vw_informacionPersona" Width="1.5" PointX="10.75" PointY="8.75" />
-        <AssociationConnector Association="DocumentacionDemoLocalModel.FK_procesoDocumentacion_dane" />
         <AssociationConnector Association="DocumentacionDemoLocalModel.FK_persona_genero" />
-        <AssociationConnector Association="DocumentacionDemoLocalModel.FK_procesoDocumentacion_hechoVictimizante" />
-        <AssociationConnector Association="DocumentacionDemoLocalModel.FK_procesoDocumentacion_parentesco" />
         <AssociationConnector Association="DocumentacionDemoLocalModel.FK_persona_tipoDocumento" />
-        <AssociationConnector Association="DocumentacionDemoLocalModel.FK_procesoDocumentacion_persona" />
-        <AssociationConnector Association="DocumentacionDemoLocalModel.FK_procesoDocumentacion_persona1" />
         <AssociationConnector Association="DocumentacionDemoLocalModel.FK_soporteXRadicado_persona" />
         <AssociationConnector Association="DocumentacionDemoLocalModel.FK_soporteXRadicado_soporte" />
-        <AssociationConnector Association="DocumentacionDemoLocalModel.FK_usuario_tipoDocumento" />
+        <EntityTypeShape EntityType="DocumentacionDemoLocalModel.procesoDocumentacion" Width="1.5" PointX="8.25" PointY="8.5" />
+        <AssociationConnector Association="DocumentacionDemoLocalModel.FK_procesoDocumentacion_dane" />
+        <AssociationConnector Association="DocumentacionDemoLocalModel.FK_procesoDocumentacion_hechoVictimizante" />
+        <AssociationConnector Association="DocumentacionDemoLocalModel.FK_procesoDocumentacion_parentesco" />
+        <AssociationConnector Association="DocumentacionDemoLocalModel.FK_procesoDocumentacion_persona" />
+        <AssociationConnector Association="DocumentacionDemoLocalModel.FK_procesoDocumentacion_persona1" />
+        <EntityTypeShape EntityType="DocumentacionDemoLocalModel.usuario" Width="1.5" PointX="3" PointY="11" />
         <AssociationConnector Association="DocumentacionDemoLocalModel.FK_procesoDocumentacion_usuario" />
+        <AssociationConnector Association="DocumentacionDemoLocalModel.FK_usuario_tipoDocumento" />
+        <EntityTypeShape EntityType="DocumentacionDemoLocalModel.usuarioXradicado" Width="1.5" PointX="5.25" PointY="11.5" />
         <AssociationConnector Association="DocumentacionDemoLocalModel.FK_usuarioXradicado_usuario" />
       </Diagram>
     </edmx:Diagrams>

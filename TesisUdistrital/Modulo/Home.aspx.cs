@@ -4,14 +4,48 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace TesisUdistrital.Modulo
 {
     public partial class Home : System.Web.UI.Page
-    { 
+    {
+        ConexionR c = new ConexionR();
+        String Script;
+        private Int64 idUsuarioLogeado;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            idUsuarioLogeado = (Session["usuarioLogeado"] as usuario).id;
+            try
+            {
+                DocumentacionDemoLocalEntities contextoL = new DocumentacionDemoLocalEntities();
+                usuario usuarioL = contextoL.usuario.FirstOrDefault(X => X.id == idUsuarioLogeado);
+                if (usuarioL == null)
+                {
+                    DocumentacionDemoEntities contextoR = new DocumentacionDemoEntities();
+                    usuario usuarioR = contextoR.usuario.FirstOrDefault(X => X.id == idUsuarioLogeado);
+                    usuario nvoUsuarioL = new usuario();
+                    nvoUsuarioL.id = usuarioR.id;
+                    nvoUsuarioL.primerNombre = usuarioR.primerNombre;
+                    nvoUsuarioL.segundoNombre = usuarioR.segundoNombre;
+                    nvoUsuarioL.primerApellido = usuarioR.primerApellido;
+                    nvoUsuarioL.segundoApellido = usuarioR.segundoApellido;
+                    nvoUsuarioL.tipoDocumento = usuarioR.tipoDocumento;
+                    nvoUsuarioL.noDocumento = usuarioR.noDocumento;
+                    nvoUsuarioL.usuarioLogin = usuarioR.usuarioLogin;
+                    nvoUsuarioL.contrasena = usuarioR.contrasena;
+                    contextoL.usuario.Add(nvoUsuarioL);
+                    contextoL.SaveChanges();
+                }
+            }
+            catch (SystemException ex)
+            {
+                PnlMensajes.CssClass = "alert alert-success";
+                Label textoError = new Label();
+                textoError.Text = "Se ha realizado la migración de los casos solicitados, ahora puede acceder a ellos desde el sistema Local";
+                PnlMensajes.Controls.Add(textoError);
+            }
         }
 
         protected void LinqDataSource_Selecting(object sender, LinqDataSourceSelectEventArgs e)
@@ -128,29 +162,124 @@ namespace TesisUdistrital.Modulo
 
         protected void btnDescarga_Click(object sender, EventArgs e)
         {
-            ddlIdCasos.Items.Clear();
-
+            try
+            {
+                List<string> caso = new List<string>();
+                //1. identificar los ids de los casos seleccionados
+                foreach (GridViewRow row in dgvHistoricoNna.Rows)
+                {
+                    CheckBox check = row.FindControl("CheckBox1") as CheckBox;
+                    //1,1. guardar los Id seleccionados en un DropDownList
+                    if (check.Checked)
+                    {
+                        string proceso = Convert.ToString(row.Cells[3].Text);
+                        string radicado = Convert.ToString(row.Cells[2].Text);
+                        caso.Add(proceso + '/' + radicado);
+                    }
+                }
+                //1.2 validar casos repetidos
+                var consulta = (from p in caso select p).Distinct();
+                List<string> rads = new List<string>();
+                foreach (var item in consulta)
+                {
+                    rads.Add(item);
+                }
+                //2 insercion en base Local
+                ///2.1. Personas
+                ////obtener todos los idPersona de todos los radicados
+                List<string> idPersona = new List<string>();
+                foreach (var item in rads)
+                {
+                    string[] radicado = item.Split('/');
+                    Script = "select distinct p.idPersonaDestinatario from procesoDocumentacion p where p.rad = '" + radicado[1].ToString() + "' and p.proceso = '" + radicado[0].ToString() + "'";
+                    DataTable DT = c.ConsultaAUX(Script);
+                    if (DT.Rows.Count > 0)
+                    {
+                        for (int i = 0; i < DT.Rows.Count; i++)
+                        {
+                            DataRow DR = DT.Rows[i];
+                            idPersona.Add(DR.ItemArray[0].ToString());
+                        }
+                    }
+                }
+                ////insertar las personas en la base Local
+                DocumentacionDemoEntities contextoR = new DocumentacionDemoEntities();
+                var personaInsertar = from p in contextoR.persona
+                                      where idPersona.Contains(p.idPersona.ToString())
+                                      select p;
+                foreach(var personaR in personaInsertar)
+                {
+                    DocumentacionDemoLocalEntities contextoL = new DocumentacionDemoLocalEntities();
+                    persona nvaPersona = new persona();
+                    nvaPersona.idPersona = personaR.idPersona;
+                    nvaPersona.idPersonaUnique = personaR.idPersonaUnique;
+                    nvaPersona.primerNombre = personaR.primerNombre;
+                    nvaPersona.segundoNombre = personaR.segundoNombre;
+                    nvaPersona.primerApellido = personaR.primerApellido;
+                    nvaPersona.segundoApellido = personaR.segundoApellido;
+                    nvaPersona.tipoDocumento = personaR.tipoDocumento;
+                    nvaPersona.noDocumento = personaR.noDocumento;
+                    nvaPersona.fechaNacimiento = personaR.fechaNacimiento;
+                    nvaPersona.genero = personaR.genero;
+                    contextoL.persona.Add(nvaPersona);
+                    contextoL.SaveChanges();
+                }
+                ////buscar todos los registros en la base de datos de los radicados seleccionados
+                /////insertar los casos en la base Local
+                foreach(var radicadoR in rads)
+                {
+                    string[] radR = radicadoR.Split('/');
+                    string procesoR = radR[0].ToString();
+                    string radrR = radR[1].ToString();
+                    var casoInsertar = from p in contextoR.procesoDocumentacion
+                                       where p.proceso == procesoR && p.rad == radrR
+                                       select p;
+                    foreach (var registroInsertar in casoInsertar)
+                    {
+                        DocumentacionDemoLocalEntities contextoL = new DocumentacionDemoLocalEntities();
+                        procesoDocumentacion nvoRegistro = new procesoDocumentacion();
+                        nvoRegistro.uniqueIdentifier = registroInsertar.uniqueIdentifier;
+                        nvoRegistro.rad = registroInsertar.rad;
+                        nvoRegistro.proceso = registroInsertar.proceso;
+                        nvoRegistro.hechoVictimizante = registroInsertar.hechoVictimizante;
+                        nvoRegistro.daneOcurrenciaHecho = registroInsertar.daneOcurrenciaHecho;
+                        nvoRegistro.fechaOcurrenciaHecho = registroInsertar.fechaOcurrenciaHecho;
+                        nvoRegistro.parentesco = registroInsertar.parentesco;
+                        nvoRegistro.porcentaje = registroInsertar.porcentaje;
+                        nvoRegistro.usuarioModificacion = (Session["usuarioLogeado"] as usuario).id; 
+                        nvoRegistro.fechaModificacion = DateTime.Now;
+                        nvoRegistro.idPersonaVictima = registroInsertar.idPersonaVictima;
+                        nvoRegistro.idPersonaDestinatario = registroInsertar.idPersonaDestinatario;
+                        contextoL.procesoDocumentacion.Add(nvoRegistro);
+                        contextoL.SaveChanges();
+                    }
+                    usuarioXradicado nvaAsignacion = new usuarioXradicado();
+                    nvaAsignacion.rad = radicadoR;
+                    nvaAsignacion.proceso = procesoR;
+                    nvaAsignacion.idusuario = (Session["usuarioLogeado"] as usuario).id;
+                    nvaAsignacion.estado = true;
+                    nvaAsignacion.fechaAsignacion = DateTime.Now;
+                    contextoR.usuarioXradicado.Add(nvaAsignacion);
+                    contextoR.SaveChanges();
+                }
+                PnlMensajes.CssClass = "alert alert-success";
+                Label textoError = new Label();
+                textoError.Text = "Ha culminado la migración de datos al sistema Local, ahora puede acceder a ellos desde el sistema local";
+                PnlMensajes.Controls.Add(textoError);
+            }
+            catch(SystemException ex)
+            {
+                PnlMensajes.CssClass = "alert alert-danger";
+                Label textoError = new Label();
+                textoError.Text = ex.ToString();
+                PnlMensajes.Controls.Add(textoError);
+            }            
             //2. buscar los Id, y retornar los radicados unicos
             //3. Cargar a la base local
             //3.1. tabla persona
             //3.2. tabla documentacion
             //3.3. usuario por radicado
-            //4. actualizar tabla usuarioxradicado con los radicados descargados 
-
-            //1. identificar los ids de los casos seleccionados
-            foreach (GridViewRow row in dgvHistoricoNna.Rows)
-            {
-                CheckBox check = row.FindControl("CheckBox1") as CheckBox;
-                //1,1. guardar los Id seleccionados en un DropDownList
-                if (check.Checked)
-                {
-                    ListItem Li = new ListItem();
-                    Li.Value = Convert.ToString(row.Cells[1].Text);
-                    Li.Text = Convert.ToString(row.Cells[2].Text);
-                    ddlIdCasos.Items.Add(Li);
-                }
-            }
-            ddlIdCasos.Visible = true;
+            //4. actualizar tabla usuarioxradicado con los radicados descargados
         }
     }
 }

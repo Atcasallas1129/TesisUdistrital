@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="TesisUdistrital.Modulo.Home" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <asp:Panel ID="PnlMensajes" runat="server">
+    </asp:Panel>
     <div class="row">
         <div class="col-lg-12">
             <asp:PlaceHolder runat="server" ID="ErrorMessage" Visible="true">

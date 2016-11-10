@@ -50,20 +50,9 @@
           <Property Name="fechaNacimiento" Type="date" Nullable="false" />
           <Property Name="genero" Type="bigint" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DocumentacionDemoLocal.dbo.procesoDocumentacion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="procesoDocumentacion">
           <Key>
             <PropertyRef Name="id" />
-            <PropertyRef Name="uniqueIdentifier" />
-            <PropertyRef Name="rad" />
-            <PropertyRef Name="proceso" />
-            <PropertyRef Name="hechoVictimizante" />
-            <PropertyRef Name="daneOcurrenciaHecho" />
-            <PropertyRef Name="fechaOcurrenciaHecho" />
-            <PropertyRef Name="parentesco" />
-            <PropertyRef Name="idPersonaVictima" />
-            <PropertyRef Name="idPersonaDestinatario" />
           </Key>
           <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="uniqueIdentifier" Type="uniqueidentifier" Nullable="false" />
@@ -121,7 +110,7 @@ warning 6002: The table/view 'DocumentacionDemoLocal.dbo.procesoDocumentacion' d
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id" Type="bigint" Nullable="false" />
           <Property Name="primerNombre" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="segundoNombre" Type="nvarchar" MaxLength="50" />
           <Property Name="primerApellido" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -131,16 +120,9 @@ warning 6002: The table/view 'DocumentacionDemoLocal.dbo.procesoDocumentacion' d
           <Property Name="usuarioLogin" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="contrasena" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DocumentacionDemoLocal.dbo.usuarioXradicado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="usuarioXradicado">
           <Key>
             <PropertyRef Name="idAsignacion" />
-            <PropertyRef Name="rad" />
-            <PropertyRef Name="proceso" />
-            <PropertyRef Name="estado" />
-            <PropertyRef Name="idusuario" />
-            <PropertyRef Name="fechaAsignacion" />
           </Key>
           <Property Name="idAsignacion" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="rad" Type="nvarchar(max)" Nullable="false" />
@@ -424,38 +406,13 @@ warning 6002: The table/view 'DocumentacionDemoLocal.dbo.vw_informacionPersona' 
           <EntitySet Name="hechoVictimizante" EntityType="Self.hechoVictimizante" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="parentesco" EntityType="Self.parentesco" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="persona" EntityType="Self.persona" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="procesoDocumentacion" EntityType="Self.procesoDocumentacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="soporte" EntityType="Self.soporte" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="soporteXRadicado" EntityType="Self.soporteXRadicado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tipoDocumento" EntityType="Self.tipoDocumento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="procesoDocumentacion" EntityType="Self.procesoDocumentacion" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [procesoDocumentacion].[id] AS [id], 
-    [procesoDocumentacion].[uniqueIdentifier] AS [uniqueIdentifier], 
-    [procesoDocumentacion].[rad] AS [rad], 
-    [procesoDocumentacion].[proceso] AS [proceso], 
-    [procesoDocumentacion].[hechoVictimizante] AS [hechoVictimizante], 
-    [procesoDocumentacion].[daneOcurrenciaHecho] AS [daneOcurrenciaHecho], 
-    [procesoDocumentacion].[fechaOcurrenciaHecho] AS [fechaOcurrenciaHecho], 
-    [procesoDocumentacion].[parentesco] AS [parentesco], 
-    [procesoDocumentacion].[porcentaje] AS [porcentaje], 
-    [procesoDocumentacion].[usuarioModificacion] AS [usuarioModificacion], 
-    [procesoDocumentacion].[fechaModificacion] AS [fechaModificacion], 
-    [procesoDocumentacion].[idPersonaVictima] AS [idPersonaVictima], 
-    [procesoDocumentacion].[idPersonaDestinatario] AS [idPersonaDestinatario]
-    FROM [dbo].[procesoDocumentacion] AS [procesoDocumentacion]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="usuarioXradicado" EntityType="Self.usuarioXradicado" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [usuarioXradicado].[idAsignacion] AS [idAsignacion], 
-    [usuarioXradicado].[rad] AS [rad], 
-    [usuarioXradicado].[proceso] AS [proceso], 
-    [usuarioXradicado].[estado] AS [estado], 
-    [usuarioXradicado].[idusuario] AS [idusuario], 
-    [usuarioXradicado].[fechaAsignacion] AS [fechaAsignacion]
-    FROM [dbo].[usuarioXradicado] AS [usuarioXradicado]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="usuarioXradicado" EntityType="Self.usuarioXradicado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vw_consultaCasoDocumentacion" EntityType="Self.vw_consultaCasoDocumentacion" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vw_consultaCasoDocumentacion].[id] AS [id], 
@@ -568,38 +525,15 @@ warning 6002: The table/view 'DocumentacionDemoLocal.dbo.vw_informacionPersona' 
           <EntitySet Name="soporteXRadicado" EntityType="DocumentacionDemoLocalModel.soporteXRadicado" />
           <EntitySet Name="sysdiagrams" EntityType="DocumentacionDemoLocalModel.sysdiagrams" />
           <EntitySet Name="tipoDocumento" EntityType="DocumentacionDemoLocalModel.tipoDocumento" />
-          <EntitySet Name="usuario" EntityType="DocumentacionDemoLocalModel.usuario" />
-          <EntitySet Name="procesoDocumentacion" EntityType="DocumentacionDemoLocalModel.procesoDocumentacion" />
-          <EntitySet Name="usuarioXradicado" EntityType="DocumentacionDemoLocalModel.usuarioXradicado" />
           <EntitySet Name="vw_consultaCasoDocumentacion" EntityType="DocumentacionDemoLocalModel.vw_consultaCasoDocumentacion" />
           <EntitySet Name="vw_informacionPersona" EntityType="DocumentacionDemoLocalModel.vw_informacionPersona" />
-          <AssociationSet Name="FK_procesoDocumentacion_dane" Association="DocumentacionDemoLocalModel.FK_procesoDocumentacion_dane">
-            <End Role="dane" EntitySet="dane" />
-            <End Role="procesoDocumentacion" EntitySet="procesoDocumentacion" />
-          </AssociationSet>
           <AssociationSet Name="FK_persona_genero" Association="DocumentacionDemoLocalModel.FK_persona_genero">
             <End Role="genero" EntitySet="genero" />
             <End Role="persona" EntitySet="persona" />
           </AssociationSet>
-          <AssociationSet Name="FK_procesoDocumentacion_hechoVictimizante" Association="DocumentacionDemoLocalModel.FK_procesoDocumentacion_hechoVictimizante">
-            <End Role="hechoVictimizante" EntitySet="hechoVictimizante" />
-            <End Role="procesoDocumentacion" EntitySet="procesoDocumentacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_procesoDocumentacion_parentesco" Association="DocumentacionDemoLocalModel.FK_procesoDocumentacion_parentesco">
-            <End Role="parentesco" EntitySet="parentesco" />
-            <End Role="procesoDocumentacion" EntitySet="procesoDocumentacion" />
-          </AssociationSet>
           <AssociationSet Name="FK_persona_tipoDocumento" Association="DocumentacionDemoLocalModel.FK_persona_tipoDocumento">
             <End Role="tipoDocumento" EntitySet="tipoDocumento" />
             <End Role="persona" EntitySet="persona" />
-          </AssociationSet>
-          <AssociationSet Name="FK_procesoDocumentacion_persona" Association="DocumentacionDemoLocalModel.FK_procesoDocumentacion_persona">
-            <End Role="persona" EntitySet="persona" />
-            <End Role="procesoDocumentacion" EntitySet="procesoDocumentacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_procesoDocumentacion_persona1" Association="DocumentacionDemoLocalModel.FK_procesoDocumentacion_persona1">
-            <End Role="persona" EntitySet="persona" />
-            <End Role="procesoDocumentacion" EntitySet="procesoDocumentacion" />
           </AssociationSet>
           <AssociationSet Name="FK_soporteXRadicado_persona" Association="DocumentacionDemoLocalModel.FK_soporteXRadicado_persona">
             <End Role="persona" EntitySet="persona" />
@@ -608,18 +542,6 @@ warning 6002: The table/view 'DocumentacionDemoLocal.dbo.vw_informacionPersona' 
           <AssociationSet Name="FK_soporteXRadicado_soporte" Association="DocumentacionDemoLocalModel.FK_soporteXRadicado_soporte">
             <End Role="soporte" EntitySet="soporte" />
             <End Role="soporteXRadicado" EntitySet="soporteXRadicado" />
-          </AssociationSet>
-          <AssociationSet Name="FK_usuario_tipoDocumento" Association="DocumentacionDemoLocalModel.FK_usuario_tipoDocumento">
-            <End Role="tipoDocumento" EntitySet="tipoDocumento" />
-            <End Role="usuario" EntitySet="usuario" />
-          </AssociationSet>
-          <AssociationSet Name="FK_procesoDocumentacion_usuario" Association="DocumentacionDemoLocalModel.FK_procesoDocumentacion_usuario">
-            <End Role="usuario" EntitySet="usuario" />
-            <End Role="procesoDocumentacion" EntitySet="procesoDocumentacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_usuarioXradicado_usuario" Association="DocumentacionDemoLocalModel.FK_usuarioXradicado_usuario">
-            <End Role="usuario" EntitySet="usuario" />
-            <End Role="usuarioXradicado" EntitySet="usuarioXradicado" />
           </AssociationSet>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -651,6 +573,41 @@ warning 6002: The table/view 'DocumentacionDemoLocal.dbo.vw_informacionPersona' 
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="procesoDocumentacion" EntityType="DocumentacionDemoLocalModel.procesoDocumentacion" />
+          <AssociationSet Name="FK_procesoDocumentacion_dane" Association="DocumentacionDemoLocalModel.FK_procesoDocumentacion_dane">
+            <End Role="dane" EntitySet="dane" />
+            <End Role="procesoDocumentacion" EntitySet="procesoDocumentacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_procesoDocumentacion_hechoVictimizante" Association="DocumentacionDemoLocalModel.FK_procesoDocumentacion_hechoVictimizante">
+            <End Role="hechoVictimizante" EntitySet="hechoVictimizante" />
+            <End Role="procesoDocumentacion" EntitySet="procesoDocumentacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_procesoDocumentacion_parentesco" Association="DocumentacionDemoLocalModel.FK_procesoDocumentacion_parentesco">
+            <End Role="parentesco" EntitySet="parentesco" />
+            <End Role="procesoDocumentacion" EntitySet="procesoDocumentacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_procesoDocumentacion_persona" Association="DocumentacionDemoLocalModel.FK_procesoDocumentacion_persona">
+            <End Role="persona" EntitySet="persona" />
+            <End Role="procesoDocumentacion" EntitySet="procesoDocumentacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_procesoDocumentacion_persona1" Association="DocumentacionDemoLocalModel.FK_procesoDocumentacion_persona1">
+            <End Role="persona" EntitySet="persona" />
+            <End Role="procesoDocumentacion" EntitySet="procesoDocumentacion" />
+          </AssociationSet>
+          <EntitySet Name="usuario" EntityType="DocumentacionDemoLocalModel.usuario" />
+          <AssociationSet Name="FK_procesoDocumentacion_usuario" Association="DocumentacionDemoLocalModel.FK_procesoDocumentacion_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="procesoDocumentacion" EntitySet="procesoDocumentacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuario_tipoDocumento" Association="DocumentacionDemoLocalModel.FK_usuario_tipoDocumento">
+            <End Role="tipoDocumento" EntitySet="tipoDocumento" />
+            <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+          <EntitySet Name="usuarioXradicado" EntityType="DocumentacionDemoLocalModel.usuarioXradicado" />
+          <AssociationSet Name="FK_usuarioXradicado_usuario" Association="DocumentacionDemoLocalModel.FK_usuarioXradicado_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="usuarioXradicado" EntitySet="usuarioXradicado" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="dane">
           <Key>
@@ -702,9 +659,9 @@ warning 6002: The table/view 'DocumentacionDemoLocal.dbo.vw_informacionPersona' 
           <Property Name="genero" Type="Int64" Nullable="false" />
           <NavigationProperty Name="genero1" Relationship="DocumentacionDemoLocalModel.FK_persona_genero" FromRole="persona" ToRole="genero" />
           <NavigationProperty Name="tipoDocumento1" Relationship="DocumentacionDemoLocalModel.FK_persona_tipoDocumento" FromRole="persona" ToRole="tipoDocumento" />
+          <NavigationProperty Name="soporteXRadicado" Relationship="DocumentacionDemoLocalModel.FK_soporteXRadicado_persona" FromRole="persona" ToRole="soporteXRadicado" />
           <NavigationProperty Name="procesoDocumentacion" Relationship="DocumentacionDemoLocalModel.FK_procesoDocumentacion_persona" FromRole="persona" ToRole="procesoDocumentacion" />
           <NavigationProperty Name="procesoDocumentacion1" Relationship="DocumentacionDemoLocalModel.FK_procesoDocumentacion_persona1" FromRole="persona" ToRole="procesoDocumentacion" />
-          <NavigationProperty Name="soporteXRadicado" Relationship="DocumentacionDemoLocalModel.FK_soporteXRadicado_persona" FromRole="persona" ToRole="soporteXRadicado" />
         </EntityType>
         <EntityType Name="soporte">
           <Key>
@@ -748,73 +705,6 @@ warning 6002: The table/view 'DocumentacionDemoLocal.dbo.vw_informacionPersona' 
           <Property Name="descripcionDocumento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="persona" Relationship="DocumentacionDemoLocalModel.FK_persona_tipoDocumento" FromRole="tipoDocumento" ToRole="persona" />
           <NavigationProperty Name="usuario" Relationship="DocumentacionDemoLocalModel.FK_usuario_tipoDocumento" FromRole="tipoDocumento" ToRole="usuario" />
-        </EntityType>
-        <EntityType Name="usuario">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="primerNombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="segundoNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="primerApellido" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="segundoApellido" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="tipoDocumento" Type="Int64" Nullable="false" />
-          <Property Name="noDocumento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="usuarioLogin" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="contrasena" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tipoDocumento1" Relationship="DocumentacionDemoLocalModel.FK_usuario_tipoDocumento" FromRole="usuario" ToRole="tipoDocumento" />
-          <NavigationProperty Name="procesoDocumentacion" Relationship="DocumentacionDemoLocalModel.FK_procesoDocumentacion_usuario" FromRole="usuario" ToRole="procesoDocumentacion" />
-          <NavigationProperty Name="usuarioXradicado" Relationship="DocumentacionDemoLocalModel.FK_usuarioXradicado_usuario" FromRole="usuario" ToRole="usuarioXradicado" />
-        </EntityType>
-        <EntityType Name="procesoDocumentacion">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="uniqueIdentifier" />
-            <PropertyRef Name="rad" />
-            <PropertyRef Name="proceso" />
-            <PropertyRef Name="hechoVictimizante" />
-            <PropertyRef Name="daneOcurrenciaHecho" />
-            <PropertyRef Name="fechaOcurrenciaHecho" />
-            <PropertyRef Name="parentesco" />
-            <PropertyRef Name="idPersonaVictima" />
-            <PropertyRef Name="idPersonaDestinatario" />
-          </Key>
-          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="uniqueIdentifier" Type="Guid" Nullable="false" />
-          <Property Name="rad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="proceso" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="hechoVictimizante" Type="Int64" Nullable="false" />
-          <Property Name="daneOcurrenciaHecho" Type="Int64" Nullable="false" />
-          <Property Name="fechaOcurrenciaHecho" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="parentesco" Type="Int64" Nullable="false" />
-          <Property Name="porcentaje" Type="Double" />
-          <Property Name="usuarioModificacion" Type="Int64" />
-          <Property Name="fechaModificacion" Type="DateTime" Precision="3" />
-          <Property Name="idPersonaVictima" Type="Int64" Nullable="false" />
-          <Property Name="idPersonaDestinatario" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="dane" Relationship="DocumentacionDemoLocalModel.FK_procesoDocumentacion_dane" FromRole="procesoDocumentacion" ToRole="dane" />
-          <NavigationProperty Name="hechoVictimizante1" Relationship="DocumentacionDemoLocalModel.FK_procesoDocumentacion_hechoVictimizante" FromRole="procesoDocumentacion" ToRole="hechoVictimizante" />
-          <NavigationProperty Name="parentesco1" Relationship="DocumentacionDemoLocalModel.FK_procesoDocumentacion_parentesco" FromRole="procesoDocumentacion" ToRole="parentesco" />
-          <NavigationProperty Name="persona" Relationship="DocumentacionDemoLocalModel.FK_procesoDocumentacion_persona" FromRole="procesoDocumentacion" ToRole="persona" />
-          <NavigationProperty Name="persona1" Relationship="DocumentacionDemoLocalModel.FK_procesoDocumentacion_persona1" FromRole="procesoDocumentacion" ToRole="persona" />
-          <NavigationProperty Name="usuario" Relationship="DocumentacionDemoLocalModel.FK_procesoDocumentacion_usuario" FromRole="procesoDocumentacion" ToRole="usuario" />
-        </EntityType>
-        <EntityType Name="usuarioXradicado">
-          <Key>
-            <PropertyRef Name="idAsignacion" />
-            <PropertyRef Name="rad" />
-            <PropertyRef Name="proceso" />
-            <PropertyRef Name="estado" />
-            <PropertyRef Name="idusuario" />
-            <PropertyRef Name="fechaAsignacion" />
-          </Key>
-          <Property Name="idAsignacion" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="rad" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="proceso" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="estado" Type="Boolean" Nullable="false" />
-          <Property Name="idusuario" Type="Int64" Nullable="false" />
-          <Property Name="fechaAsignacion" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="usuario" Relationship="DocumentacionDemoLocalModel.FK_usuarioXradicado_usuario" FromRole="usuarioXradicado" ToRole="usuario" />
         </EntityType>
         <EntityType Name="vw_consultaCasoDocumentacion">
           <Key>
@@ -906,18 +796,6 @@ warning 6002: The table/view 'DocumentacionDemoLocal.dbo.vw_informacionPersona' 
           <Property Name="fechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Genero" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <Association Name="FK_procesoDocumentacion_dane">
-          <End Type="DocumentacionDemoLocalModel.dane" Role="dane" Multiplicity="1" />
-          <End Type="DocumentacionDemoLocalModel.procesoDocumentacion" Role="procesoDocumentacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="dane">
-              <PropertyRef Name="codigoDane" />
-            </Principal>
-            <Dependent Role="procesoDocumentacion">
-              <PropertyRef Name="daneOcurrenciaHecho" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_persona_genero">
           <End Type="DocumentacionDemoLocalModel.genero" Role="genero" Multiplicity="1" />
           <End Type="DocumentacionDemoLocalModel.persona" Role="persona" Multiplicity="*" />
@@ -930,30 +808,6 @@ warning 6002: The table/view 'DocumentacionDemoLocal.dbo.vw_informacionPersona' 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_procesoDocumentacion_hechoVictimizante">
-          <End Type="DocumentacionDemoLocalModel.hechoVictimizante" Role="hechoVictimizante" Multiplicity="1" />
-          <End Type="DocumentacionDemoLocalModel.procesoDocumentacion" Role="procesoDocumentacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="hechoVictimizante">
-              <PropertyRef Name="idHechoVictimizante" />
-            </Principal>
-            <Dependent Role="procesoDocumentacion">
-              <PropertyRef Name="hechoVictimizante" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_procesoDocumentacion_parentesco">
-          <End Type="DocumentacionDemoLocalModel.parentesco" Role="parentesco" Multiplicity="1" />
-          <End Type="DocumentacionDemoLocalModel.procesoDocumentacion" Role="procesoDocumentacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="parentesco">
-              <PropertyRef Name="idPerentesco" />
-            </Principal>
-            <Dependent Role="procesoDocumentacion">
-              <PropertyRef Name="parentesco" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_persona_tipoDocumento">
           <End Type="DocumentacionDemoLocalModel.tipoDocumento" Role="tipoDocumento" Multiplicity="1" />
           <End Type="DocumentacionDemoLocalModel.persona" Role="persona" Multiplicity="*" />
@@ -963,30 +817,6 @@ warning 6002: The table/view 'DocumentacionDemoLocal.dbo.vw_informacionPersona' 
             </Principal>
             <Dependent Role="persona">
               <PropertyRef Name="tipoDocumento" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_procesoDocumentacion_persona">
-          <End Type="DocumentacionDemoLocalModel.persona" Role="persona" Multiplicity="1" />
-          <End Type="DocumentacionDemoLocalModel.procesoDocumentacion" Role="procesoDocumentacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="persona">
-              <PropertyRef Name="idPersona" />
-            </Principal>
-            <Dependent Role="procesoDocumentacion">
-              <PropertyRef Name="idPersonaVictima" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_procesoDocumentacion_persona1">
-          <End Type="DocumentacionDemoLocalModel.persona" Role="persona" Multiplicity="1" />
-          <End Type="DocumentacionDemoLocalModel.procesoDocumentacion" Role="procesoDocumentacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="persona">
-              <PropertyRef Name="idPersona" />
-            </Principal>
-            <Dependent Role="procesoDocumentacion">
-              <PropertyRef Name="idPersonaDestinatario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1014,18 +844,118 @@ warning 6002: The table/view 'DocumentacionDemoLocal.dbo.vw_informacionPersona' 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_usuario_tipoDocumento">
-          <End Type="DocumentacionDemoLocalModel.tipoDocumento" Role="tipoDocumento" Multiplicity="1" />
-          <End Type="DocumentacionDemoLocalModel.usuario" Role="usuario" Multiplicity="*" />
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="procesoDocumentacion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="uniqueIdentifier" Type="Guid" Nullable="false" />
+          <Property Name="rad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="proceso" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="hechoVictimizante" Type="Int64" Nullable="false" />
+          <Property Name="daneOcurrenciaHecho" Type="Int64" Nullable="false" />
+          <Property Name="fechaOcurrenciaHecho" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="parentesco" Type="Int64" Nullable="false" />
+          <Property Name="porcentaje" Type="Double" />
+          <Property Name="usuarioModificacion" Type="Int64" />
+          <Property Name="fechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="idPersonaVictima" Type="Int64" Nullable="false" />
+          <Property Name="idPersonaDestinatario" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="dane" Relationship="DocumentacionDemoLocalModel.FK_procesoDocumentacion_dane" FromRole="procesoDocumentacion" ToRole="dane" />
+          <NavigationProperty Name="hechoVictimizante1" Relationship="DocumentacionDemoLocalModel.FK_procesoDocumentacion_hechoVictimizante" FromRole="procesoDocumentacion" ToRole="hechoVictimizante" />
+          <NavigationProperty Name="parentesco1" Relationship="DocumentacionDemoLocalModel.FK_procesoDocumentacion_parentesco" FromRole="procesoDocumentacion" ToRole="parentesco" />
+          <NavigationProperty Name="persona" Relationship="DocumentacionDemoLocalModel.FK_procesoDocumentacion_persona" FromRole="procesoDocumentacion" ToRole="persona" />
+          <NavigationProperty Name="persona1" Relationship="DocumentacionDemoLocalModel.FK_procesoDocumentacion_persona1" FromRole="procesoDocumentacion" ToRole="persona" />
+          <NavigationProperty Name="usuario" Relationship="DocumentacionDemoLocalModel.FK_procesoDocumentacion_usuario" FromRole="procesoDocumentacion" ToRole="usuario" />
+        </EntityType>
+        <Association Name="FK_procesoDocumentacion_dane">
+          <End Type="DocumentacionDemoLocalModel.dane" Role="dane" Multiplicity="1" />
+          <End Type="DocumentacionDemoLocalModel.procesoDocumentacion" Role="procesoDocumentacion" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tipoDocumento">
-              <PropertyRef Name="idTipoDocumento" />
+            <Principal Role="dane">
+              <PropertyRef Name="codigoDane" />
             </Principal>
-            <Dependent Role="usuario">
-              <PropertyRef Name="tipoDocumento" />
+            <Dependent Role="procesoDocumentacion">
+              <PropertyRef Name="daneOcurrenciaHecho" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_procesoDocumentacion_hechoVictimizante">
+          <End Type="DocumentacionDemoLocalModel.hechoVictimizante" Role="hechoVictimizante" Multiplicity="1" />
+          <End Type="DocumentacionDemoLocalModel.procesoDocumentacion" Role="procesoDocumentacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hechoVictimizante">
+              <PropertyRef Name="idHechoVictimizante" />
+            </Principal>
+            <Dependent Role="procesoDocumentacion">
+              <PropertyRef Name="hechoVictimizante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_procesoDocumentacion_parentesco">
+          <End Type="DocumentacionDemoLocalModel.parentesco" Role="parentesco" Multiplicity="1" />
+          <End Type="DocumentacionDemoLocalModel.procesoDocumentacion" Role="procesoDocumentacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="parentesco">
+              <PropertyRef Name="idPerentesco" />
+            </Principal>
+            <Dependent Role="procesoDocumentacion">
+              <PropertyRef Name="parentesco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_procesoDocumentacion_persona">
+          <End Type="DocumentacionDemoLocalModel.persona" Role="persona" Multiplicity="1" />
+          <End Type="DocumentacionDemoLocalModel.procesoDocumentacion" Role="procesoDocumentacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="persona">
+              <PropertyRef Name="idPersona" />
+            </Principal>
+            <Dependent Role="procesoDocumentacion">
+              <PropertyRef Name="idPersonaVictima" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_procesoDocumentacion_persona1">
+          <End Type="DocumentacionDemoLocalModel.persona" Role="persona" Multiplicity="1" />
+          <End Type="DocumentacionDemoLocalModel.procesoDocumentacion" Role="procesoDocumentacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="persona">
+              <PropertyRef Name="idPersona" />
+            </Principal>
+            <Dependent Role="procesoDocumentacion">
+              <PropertyRef Name="idPersonaDestinatario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" />
+          <Property Name="primerNombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="segundoNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="primerApellido" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="segundoApellido" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tipoDocumento" Type="Int64" Nullable="false" />
+          <Property Name="noDocumento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="usuarioLogin" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="contrasena" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="procesoDocumentacion" Relationship="DocumentacionDemoLocalModel.FK_procesoDocumentacion_usuario" FromRole="usuario" ToRole="procesoDocumentacion" />
+          <NavigationProperty Name="tipoDocumento1" Relationship="DocumentacionDemoLocalModel.FK_usuario_tipoDocumento" FromRole="usuario" ToRole="tipoDocumento" />
+          <NavigationProperty Name="usuarioXradicado" Relationship="DocumentacionDemoLocalModel.FK_usuarioXradicado_usuario" FromRole="usuario" ToRole="usuarioXradicado" />
+        </EntityType>
         <Association Name="FK_procesoDocumentacion_usuario">
           <End Type="DocumentacionDemoLocalModel.usuario" Role="usuario" Multiplicity="0..1" />
           <End Type="DocumentacionDemoLocalModel.procesoDocumentacion" Role="procesoDocumentacion" Multiplicity="*" />
@@ -1038,6 +968,30 @@ warning 6002: The table/view 'DocumentacionDemoLocal.dbo.vw_informacionPersona' 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_usuario_tipoDocumento">
+          <End Type="DocumentacionDemoLocalModel.tipoDocumento" Role="tipoDocumento" Multiplicity="1" />
+          <End Type="DocumentacionDemoLocalModel.usuario" Role="usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipoDocumento">
+              <PropertyRef Name="idTipoDocumento" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="tipoDocumento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="usuarioXradicado">
+          <Key>
+            <PropertyRef Name="idAsignacion" />
+          </Key>
+          <Property Name="idAsignacion" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rad" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="proceso" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <Property Name="idusuario" Type="Int64" Nullable="false" />
+          <Property Name="fechaAsignacion" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="usuario" Relationship="DocumentacionDemoLocalModel.FK_usuarioXradicado_usuario" FromRole="usuarioXradicado" ToRole="usuario" />
+        </EntityType>
         <Association Name="FK_usuarioXradicado_usuario">
           <End Type="DocumentacionDemoLocalModel.usuario" Role="usuario" Multiplicity="1" />
           <End Type="DocumentacionDemoLocalModel.usuarioXradicado" Role="usuarioXradicado" Multiplicity="*" />
@@ -1050,17 +1004,6 @@ warning 6002: The table/view 'DocumentacionDemoLocal.dbo.vw_informacionPersona' 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="sp_helpdiagramdefinition_Result">
-          <Property Type="Int32" Name="version" Nullable="true" />
-          <Property Type="Binary" Name="definition" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="sp_helpdiagrams_Result">
-          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-          <Property Type="Int32" Name="OwnerID" Nullable="false" />
-        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1159,52 +1102,6 @@ warning 6002: The table/view 'DocumentacionDemoLocal.dbo.vw_informacionPersona' 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="usuario">
-            <EntityTypeMapping TypeName="DocumentacionDemoLocalModel.usuario">
-              <MappingFragment StoreEntitySet="usuario">
-                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
-                <ScalarProperty Name="usuarioLogin" ColumnName="usuarioLogin" />
-                <ScalarProperty Name="noDocumento" ColumnName="noDocumento" />
-                <ScalarProperty Name="tipoDocumento" ColumnName="tipoDocumento" />
-                <ScalarProperty Name="segundoApellido" ColumnName="segundoApellido" />
-                <ScalarProperty Name="primerApellido" ColumnName="primerApellido" />
-                <ScalarProperty Name="segundoNombre" ColumnName="segundoNombre" />
-                <ScalarProperty Name="primerNombre" ColumnName="primerNombre" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="procesoDocumentacion">
-            <EntityTypeMapping TypeName="DocumentacionDemoLocalModel.procesoDocumentacion">
-              <MappingFragment StoreEntitySet="procesoDocumentacion">
-                <ScalarProperty Name="idPersonaDestinatario" ColumnName="idPersonaDestinatario" />
-                <ScalarProperty Name="idPersonaVictima" ColumnName="idPersonaVictima" />
-                <ScalarProperty Name="fechaModificacion" ColumnName="fechaModificacion" />
-                <ScalarProperty Name="usuarioModificacion" ColumnName="usuarioModificacion" />
-                <ScalarProperty Name="porcentaje" ColumnName="porcentaje" />
-                <ScalarProperty Name="parentesco" ColumnName="parentesco" />
-                <ScalarProperty Name="fechaOcurrenciaHecho" ColumnName="fechaOcurrenciaHecho" />
-                <ScalarProperty Name="daneOcurrenciaHecho" ColumnName="daneOcurrenciaHecho" />
-                <ScalarProperty Name="hechoVictimizante" ColumnName="hechoVictimizante" />
-                <ScalarProperty Name="proceso" ColumnName="proceso" />
-                <ScalarProperty Name="rad" ColumnName="rad" />
-                <ScalarProperty Name="uniqueIdentifier" ColumnName="uniqueIdentifier" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="usuarioXradicado">
-            <EntityTypeMapping TypeName="DocumentacionDemoLocalModel.usuarioXradicado">
-              <MappingFragment StoreEntitySet="usuarioXradicado">
-                <ScalarProperty Name="fechaAsignacion" ColumnName="fechaAsignacion" />
-                <ScalarProperty Name="idusuario" ColumnName="idusuario" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="proceso" ColumnName="proceso" />
-                <ScalarProperty Name="rad" ColumnName="rad" />
-                <ScalarProperty Name="idAsignacion" ColumnName="idAsignacion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="vw_consultaCasoDocumentacion">
             <EntityTypeMapping TypeName="DocumentacionDemoLocalModel.vw_consultaCasoDocumentacion">
               <MappingFragment StoreEntitySet="vw_consultaCasoDocumentacion">
@@ -1282,6 +1179,52 @@ warning 6002: The table/view 'DocumentacionDemoLocal.dbo.vw_informacionPersona' 
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="DocumentacionDemoLocalModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="DocumentacionDemoLocalModel.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="procesoDocumentacion">
+            <EntityTypeMapping TypeName="DocumentacionDemoLocalModel.procesoDocumentacion">
+              <MappingFragment StoreEntitySet="procesoDocumentacion">
+                <ScalarProperty Name="idPersonaDestinatario" ColumnName="idPersonaDestinatario" />
+                <ScalarProperty Name="idPersonaVictima" ColumnName="idPersonaVictima" />
+                <ScalarProperty Name="fechaModificacion" ColumnName="fechaModificacion" />
+                <ScalarProperty Name="usuarioModificacion" ColumnName="usuarioModificacion" />
+                <ScalarProperty Name="porcentaje" ColumnName="porcentaje" />
+                <ScalarProperty Name="parentesco" ColumnName="parentesco" />
+                <ScalarProperty Name="fechaOcurrenciaHecho" ColumnName="fechaOcurrenciaHecho" />
+                <ScalarProperty Name="daneOcurrenciaHecho" ColumnName="daneOcurrenciaHecho" />
+                <ScalarProperty Name="hechoVictimizante" ColumnName="hechoVictimizante" />
+                <ScalarProperty Name="proceso" ColumnName="proceso" />
+                <ScalarProperty Name="rad" ColumnName="rad" />
+                <ScalarProperty Name="uniqueIdentifier" ColumnName="uniqueIdentifier" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuario">
+            <EntityTypeMapping TypeName="DocumentacionDemoLocalModel.usuario">
+              <MappingFragment StoreEntitySet="usuario">
+                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+                <ScalarProperty Name="usuarioLogin" ColumnName="usuarioLogin" />
+                <ScalarProperty Name="noDocumento" ColumnName="noDocumento" />
+                <ScalarProperty Name="tipoDocumento" ColumnName="tipoDocumento" />
+                <ScalarProperty Name="segundoApellido" ColumnName="segundoApellido" />
+                <ScalarProperty Name="primerApellido" ColumnName="primerApellido" />
+                <ScalarProperty Name="segundoNombre" ColumnName="segundoNombre" />
+                <ScalarProperty Name="primerNombre" ColumnName="primerNombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuarioXradicado">
+            <EntityTypeMapping TypeName="DocumentacionDemoLocalModel.usuarioXradicado">
+              <MappingFragment StoreEntitySet="usuarioXradicado">
+                <ScalarProperty Name="fechaAsignacion" ColumnName="fechaAsignacion" />
+                <ScalarProperty Name="idusuario" ColumnName="idusuario" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="proceso" ColumnName="proceso" />
+                <ScalarProperty Name="rad" ColumnName="rad" />
+                <ScalarProperty Name="idAsignacion" ColumnName="idAsignacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
