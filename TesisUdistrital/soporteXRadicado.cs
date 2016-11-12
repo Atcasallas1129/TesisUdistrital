@@ -23,7 +23,7 @@ namespace TesisUdistrital
         public long usuarioCreacionSoporte { get; set; }
         public System.DateTime fechaCreacionSoporte { get; set; }
     
-        public virtual persona persona { get; set; }
         public virtual soporte soporte { get; set; }
+        public virtual persona persona { get; set; }
     }
 }

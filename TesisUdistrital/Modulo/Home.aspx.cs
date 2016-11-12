@@ -235,6 +235,7 @@ namespace TesisUdistrital.Modulo
                         nvaPersona.noDocumento = personaR.noDocumento;
                         nvaPersona.fechaNacimiento = personaR.fechaNacimiento;
                         nvaPersona.genero = personaR.genero;
+                        nvaPersona.personaModificada = false;
                         contextoL.persona.Add(nvaPersona);
                         contextoL.SaveChanges();
                     }
@@ -268,6 +269,7 @@ namespace TesisUdistrital.Modulo
                             nvoRegistro.fechaModificacion = DateTime.Now;
                             nvoRegistro.idPersonaVictima = registroInsertar.idPersonaVictima;
                             nvoRegistro.idPersonaDestinatario = registroInsertar.idPersonaDestinatario;
+                            nvoRegistro.regModificado = false;
                             contextoL.procesoDocumentacion.Add(nvoRegistro);
                             contextoL.SaveChanges();
                         }

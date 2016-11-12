@@ -27,6 +27,7 @@ namespace TesisUdistrital
         public Nullable<System.DateTime> fechaModificacion { get; set; }
         public long idPersonaVictima { get; set; }
         public long idPersonaDestinatario { get; set; }
+        public Nullable<bool> regModificado { get; set; }
     
         public virtual dane dane { get; set; }
         public virtual hechoVictimizante hechoVictimizante1 { get; set; }
