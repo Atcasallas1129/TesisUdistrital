@@ -22,6 +22,8 @@
         <EntityTypeShape EntityType="DocumentacionDemoModel.vw_consultaCasoDocumentacion" Width="1.5" PointX="8.375" PointY="0.75" />
         <EntityTypeShape EntityType="DocumentacionDemoModel.usuario" Width="1.5" PointX="3" PointY="10.875" />
         <AssociationConnector Association="DocumentacionDemoModel.FK_usuario_tipoDocumento" />
+        <EntityTypeShape EntityType="DocumentacionDemoModel.usuarioXradicado" Width="1.5" PointX="5.25" PointY="16.375" />
+        <AssociationConnector Association="DocumentacionDemoModel.FK_usuarioXradicado_usuario" />
         <EntityTypeShape EntityType="DocumentacionDemoModel.procesoDocumentacion" Width="1.5" PointX="5.25" PointY="10.5" />
         <AssociationConnector Association="DocumentacionDemoModel.FK_procesoDocumentacion_dane" />
         <AssociationConnector Association="DocumentacionDemoModel.FK_procesoDocumentacion_hechoVictimizante" />
@@ -29,8 +31,6 @@
         <AssociationConnector Association="DocumentacionDemoModel.FK_procesoDocumentacion_persona" />
         <AssociationConnector Association="DocumentacionDemoModel.FK_procesoDocumentacion_persona1" />
         <AssociationConnector Association="DocumentacionDemoModel.FK_procesoDocumentacion_usuario" />
-        <EntityTypeShape EntityType="DocumentacionDemoModel.usuarioXradicado" Width="1.5" PointX="5.25" PointY="16.375" />
-        <AssociationConnector Association="DocumentacionDemoModel.FK_usuarioXradicado_usuario" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

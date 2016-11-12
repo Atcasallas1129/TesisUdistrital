@@ -22,7 +22,7 @@ namespace TesisUdistrital
         public long daneOcurrenciaHecho { get; set; }
         public System.DateTime fechaOcurrenciaHecho { get; set; }
         public long parentesco { get; set; }
-        public Nullable<double> porcentaje { get; set; }
+        public string porcentaje { get; set; }
         public Nullable<long> usuarioModificacion { get; set; }
         public Nullable<System.DateTime> fechaModificacion { get; set; }
         public long idPersonaVictima { get; set; }

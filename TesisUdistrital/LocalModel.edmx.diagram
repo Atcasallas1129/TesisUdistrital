@@ -20,17 +20,17 @@
         <AssociationConnector Association="DocumentacionDemoLocalModel.FK_persona_tipoDocumento" />
         <AssociationConnector Association="DocumentacionDemoLocalModel.FK_soporteXRadicado_persona" />
         <AssociationConnector Association="DocumentacionDemoLocalModel.FK_soporteXRadicado_soporte" />
+        <EntityTypeShape EntityType="DocumentacionDemoLocalModel.usuario" Width="1.5" PointX="3" PointY="11" />
+        <AssociationConnector Association="DocumentacionDemoLocalModel.FK_usuario_tipoDocumento" />
+        <EntityTypeShape EntityType="DocumentacionDemoLocalModel.usuarioXradicado" Width="1.5" PointX="5.25" PointY="11.5" />
+        <AssociationConnector Association="DocumentacionDemoLocalModel.FK_usuarioXradicado_usuario" />
         <EntityTypeShape EntityType="DocumentacionDemoLocalModel.procesoDocumentacion" Width="1.5" PointX="8.25" PointY="8.5" />
         <AssociationConnector Association="DocumentacionDemoLocalModel.FK_procesoDocumentacion_dane" />
         <AssociationConnector Association="DocumentacionDemoLocalModel.FK_procesoDocumentacion_hechoVictimizante" />
         <AssociationConnector Association="DocumentacionDemoLocalModel.FK_procesoDocumentacion_parentesco" />
         <AssociationConnector Association="DocumentacionDemoLocalModel.FK_procesoDocumentacion_persona" />
         <AssociationConnector Association="DocumentacionDemoLocalModel.FK_procesoDocumentacion_persona1" />
-        <EntityTypeShape EntityType="DocumentacionDemoLocalModel.usuario" Width="1.5" PointX="3" PointY="11" />
         <AssociationConnector Association="DocumentacionDemoLocalModel.FK_procesoDocumentacion_usuario" />
-        <AssociationConnector Association="DocumentacionDemoLocalModel.FK_usuario_tipoDocumento" />
-        <EntityTypeShape EntityType="DocumentacionDemoLocalModel.usuarioXradicado" Width="1.5" PointX="5.25" PointY="11.5" />
-        <AssociationConnector Association="DocumentacionDemoLocalModel.FK_usuarioXradicado_usuario" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

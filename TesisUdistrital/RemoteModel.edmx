@@ -62,7 +62,7 @@
           <Property Name="daneOcurrenciaHecho" Type="bigint" Nullable="false" />
           <Property Name="fechaOcurrenciaHecho" Type="date" Nullable="false" />
           <Property Name="parentesco" Type="bigint" Nullable="false" />
-          <Property Name="porcentaje" Type="float" />
+          <Property Name="porcentaje" Type="varchar(max)" />
           <Property Name="usuarioModificacion" Type="bigint" />
           <Property Name="fechaModificacion" Type="datetime" />
           <Property Name="idPersonaVictima" Type="bigint" Nullable="false" />
@@ -747,6 +747,11 @@ warning 6002: The table/view 'DocumentacionDemo.dbo.vw_informacionPersona' does 
             <End Role="tipoDocumento" EntitySet="tipoDocumento" />
             <End Role="usuario" EntitySet="usuario" />
           </AssociationSet>
+          <EntitySet Name="usuarioXradicado" EntityType="DocumentacionDemoModel.usuarioXradicado" />
+          <AssociationSet Name="FK_usuarioXradicado_usuario" Association="DocumentacionDemoModel.FK_usuarioXradicado_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="usuarioXradicado" EntitySet="usuarioXradicado" />
+          </AssociationSet>
           <EntitySet Name="procesoDocumentacion" EntityType="DocumentacionDemoModel.procesoDocumentacion" />
           <AssociationSet Name="FK_procesoDocumentacion_dane" Association="DocumentacionDemoModel.FK_procesoDocumentacion_dane">
             <End Role="dane" EntitySet="dane" />
@@ -771,11 +776,6 @@ warning 6002: The table/view 'DocumentacionDemo.dbo.vw_informacionPersona' does 
           <AssociationSet Name="FK_procesoDocumentacion_usuario" Association="DocumentacionDemoModel.FK_procesoDocumentacion_usuario">
             <End Role="usuario" EntitySet="usuario" />
             <End Role="procesoDocumentacion" EntitySet="procesoDocumentacion" />
-          </AssociationSet>
-          <EntitySet Name="usuarioXradicado" EntityType="DocumentacionDemoModel.usuarioXradicado" />
-          <AssociationSet Name="FK_usuarioXradicado_usuario" Association="DocumentacionDemoModel.FK_usuarioXradicado_usuario">
-            <End Role="usuario" EntitySet="usuario" />
-            <End Role="usuarioXradicado" EntitySet="usuarioXradicado" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="vw_consultaCasoDocumentacion">
@@ -869,8 +869,8 @@ warning 6002: The table/view 'DocumentacionDemo.dbo.vw_informacionPersona' does 
           <Property Name="usuarioLogin" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="contrasena" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tipoDocumento1" Relationship="DocumentacionDemoModel.FK_usuario_tipoDocumento" FromRole="usuario" ToRole="tipoDocumento" />
-          <NavigationProperty Name="procesoDocumentacion" Relationship="DocumentacionDemoModel.FK_procesoDocumentacion_usuario" FromRole="usuario" ToRole="procesoDocumentacion" />
           <NavigationProperty Name="usuarioXradicado" Relationship="DocumentacionDemoModel.FK_usuarioXradicado_usuario" FromRole="usuario" ToRole="usuarioXradicado" />
+          <NavigationProperty Name="procesoDocumentacion" Relationship="DocumentacionDemoModel.FK_procesoDocumentacion_usuario" FromRole="usuario" ToRole="procesoDocumentacion" />
         </EntityType>
         <Association Name="FK_usuario_tipoDocumento">
           <End Type="DocumentacionDemoModel.tipoDocumento" Role="tipoDocumento" Multiplicity="1" />
@@ -881,6 +881,30 @@ warning 6002: The table/view 'DocumentacionDemo.dbo.vw_informacionPersona' does 
             </Principal>
             <Dependent Role="usuario">
               <PropertyRef Name="tipoDocumento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="usuarioXradicado">
+          <Key>
+            <PropertyRef Name="idAsignacion" />
+          </Key>
+          <Property Name="idAsignacion" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rad" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="proceso" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <Property Name="idusuario" Type="Int64" Nullable="false" />
+          <Property Name="fechaAsignacion" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="usuario" Relationship="DocumentacionDemoModel.FK_usuarioXradicado_usuario" FromRole="usuarioXradicado" ToRole="usuario" />
+        </EntityType>
+        <Association Name="FK_usuarioXradicado_usuario">
+          <End Type="DocumentacionDemoModel.usuario" Role="usuario" Multiplicity="1" />
+          <End Type="DocumentacionDemoModel.usuarioXradicado" Role="usuarioXradicado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuarioXradicado">
+              <PropertyRef Name="idusuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -896,7 +920,7 @@ warning 6002: The table/view 'DocumentacionDemo.dbo.vw_informacionPersona' does 
           <Property Name="daneOcurrenciaHecho" Type="Int64" Nullable="false" />
           <Property Name="fechaOcurrenciaHecho" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="parentesco" Type="Int64" Nullable="false" />
-          <Property Name="porcentaje" Type="Double" />
+          <Property Name="porcentaje" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="usuarioModificacion" Type="Int64" />
           <Property Name="fechaModificacion" Type="DateTime" Precision="3" />
           <Property Name="idPersonaVictima" Type="Int64" Nullable="false" />
@@ -977,30 +1001,6 @@ warning 6002: The table/view 'DocumentacionDemo.dbo.vw_informacionPersona' does 
             </Principal>
             <Dependent Role="procesoDocumentacion">
               <PropertyRef Name="usuarioModificacion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="usuarioXradicado">
-          <Key>
-            <PropertyRef Name="idAsignacion" />
-          </Key>
-          <Property Name="idAsignacion" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="rad" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="proceso" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="estado" Type="Boolean" Nullable="false" />
-          <Property Name="idusuario" Type="Int64" Nullable="false" />
-          <Property Name="fechaAsignacion" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="usuario" Relationship="DocumentacionDemoModel.FK_usuarioXradicado_usuario" FromRole="usuarioXradicado" ToRole="usuario" />
-        </EntityType>
-        <Association Name="FK_usuarioXradicado_usuario">
-          <End Type="DocumentacionDemoModel.usuario" Role="usuario" Multiplicity="1" />
-          <End Type="DocumentacionDemoModel.usuarioXradicado" Role="usuarioXradicado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="usuario">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="usuarioXradicado">
-              <PropertyRef Name="idusuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1194,6 +1194,18 @@ warning 6002: The table/view 'DocumentacionDemo.dbo.vw_informacionPersona' does 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="usuarioXradicado">
+            <EntityTypeMapping TypeName="DocumentacionDemoModel.usuarioXradicado">
+              <MappingFragment StoreEntitySet="usuarioXradicado">
+                <ScalarProperty Name="fechaAsignacion" ColumnName="fechaAsignacion" />
+                <ScalarProperty Name="idusuario" ColumnName="idusuario" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="proceso" ColumnName="proceso" />
+                <ScalarProperty Name="rad" ColumnName="rad" />
+                <ScalarProperty Name="idAsignacion" ColumnName="idAsignacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="procesoDocumentacion">
             <EntityTypeMapping TypeName="DocumentacionDemoModel.procesoDocumentacion">
               <MappingFragment StoreEntitySet="procesoDocumentacion">
@@ -1210,18 +1222,6 @@ warning 6002: The table/view 'DocumentacionDemo.dbo.vw_informacionPersona' does 
                 <ScalarProperty Name="rad" ColumnName="rad" />
                 <ScalarProperty Name="uniqueIdentifier" ColumnName="uniqueIdentifier" />
                 <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="usuarioXradicado">
-            <EntityTypeMapping TypeName="DocumentacionDemoModel.usuarioXradicado">
-              <MappingFragment StoreEntitySet="usuarioXradicado">
-                <ScalarProperty Name="fechaAsignacion" ColumnName="fechaAsignacion" />
-                <ScalarProperty Name="idusuario" ColumnName="idusuario" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="proceso" ColumnName="proceso" />
-                <ScalarProperty Name="rad" ColumnName="rad" />
-                <ScalarProperty Name="idAsignacion" ColumnName="idAsignacion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

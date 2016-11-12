@@ -120,7 +120,7 @@ namespace TesisUdistrital.Modulo
             try
             {
                 GridViewRow row = dgvHistoricoNna.SelectedRow;
-                int idSeleccionado = Convert.ToInt32(dgvHistoricoNna.DataKeys[row.RowIndex].Value.ToString());
+                Int64 idSeleccionado = Convert.ToInt64(dgvHistoricoNna.DataKeys[row.RowIndex].Value.ToString());
                 Session["idRegistroDetalle"] = idSeleccionado;
                 Response.Redirect("~/Modulo/DetalleDocumentacion.aspx", true);
             }

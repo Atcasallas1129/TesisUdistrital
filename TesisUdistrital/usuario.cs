@@ -17,8 +17,8 @@ namespace TesisUdistrital
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public usuario()
         {
-            this.procesoDocumentacion = new HashSet<procesoDocumentacion>();
             this.usuarioXradicado = new HashSet<usuarioXradicado>();
+            this.procesoDocumentacion = new HashSet<procesoDocumentacion>();
         }
     
         public long id { get; set; }
@@ -33,8 +33,8 @@ namespace TesisUdistrital
     
         public virtual tipoDocumento tipoDocumento1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<procesoDocumentacion> procesoDocumentacion { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<usuarioXradicado> usuarioXradicado { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<procesoDocumentacion> procesoDocumentacion { get; set; }
     }
 }
