@@ -83,6 +83,7 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -229,6 +230,7 @@
     <Content Include="Modulo\consultaCasoDocumentacion.aspx" />
     <Content Include="Modulo\DetalleDocumentacion.aspx" />
     <Content Include="Modulo\Home.aspx" />
+    <Content Include="Modulo\Sincronizacion.aspx" />
     <Content Include="RemoteModel.edmx.diagram">
       <DependentUpon>RemoteModel.edmx</DependentUpon>
     </Content>
@@ -488,6 +490,13 @@
     <Compile Include="Modulo\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Modulo\Sincronizacion.aspx.cs">
+      <DependentUpon>Sincronizacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modulo\Sincronizacion.aspx.designer.cs">
+      <DependentUpon>Sincronizacion.aspx</DependentUpon>
+    </Compile>
     <Compile Include="parentesco.cs">
       <DependentUpon>RemoteModel.tt</DependentUpon>
     </Compile>
@@ -574,6 +583,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

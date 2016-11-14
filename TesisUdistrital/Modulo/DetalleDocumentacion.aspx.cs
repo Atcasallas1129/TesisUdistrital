@@ -64,12 +64,12 @@ namespace TesisUdistrital.Modulo
 
                 //Actualizacion en la base de datos
                 ///de la persona
-                registro.persona1.primerNombre = primerNombre;
-                registro.persona1.segundoNombre = segundoNombre;// txtSegundoNombre.Text.ToString();
-                registro.persona1.primerApellido = primerApellido;// txtPrimerApellido.Text.ToString();
-                registro.persona1.segundoApellido = segundoApellido;// txtSegundoApellido.Text.ToString();
+                registro.persona1.primerNombre = primerNombre.Equals(null) ? "": primerNombre;
+                registro.persona1.segundoNombre = segundoNombre.Equals(null) ? "" : segundoNombre;// txtSegundoNombre.Text.ToString();
+                registro.persona1.primerApellido = primerApellido.Equals(null) ? "" : primerApellido;// txtPrimerApellido.Text.ToString();
+                registro.persona1.segundoApellido = segundoApellido.Equals(null) ? "" : segundoApellido;// txtSegundoApellido.Text.ToString();
                 registro.persona1.tipoDocumento = tipoDocumento;
-                registro.persona1.noDocumento = noDocumento;// txtNoDocumento.Text.ToString();
+                registro.persona1.noDocumento = noDocumento.Equals(null) ? "" : noDocumento;// txtNoDocumento.Text.ToString();
                 registro.persona1.genero = genero; 
                 registro.persona1.fechaNacimiento = fechaNacimiento;
                 ///del caso
@@ -181,36 +181,36 @@ namespace TesisUdistrital.Modulo
             if (registro != null)
             {
                 //Se carga la informacion básica del caso
-                lblIdRegistro.Text = registro.id.ToString();
-                lblCodUnique.Text = registro.uniqueIdentifier.ToString();
-                lblRadicado.Text = registro.rad.ToString();
-                lblMarcoNormativo.Text = registro.proceso.ToString();
-                lblHechoVictimizante.Text = registro.hechoVictimizante1.nombreHechoVictimizante.ToString();
-                lblDeptoOcurrenciaHecho.Text = registro.dane.nombreDepto.ToString();
-                lblMuniOcurrencia.Text = registro.dane.nombreMunicipio.ToString();
-                lblFechaOcurrencia.Text = registro.fechaOcurrenciaHecho.ToString("dd/MM/yyyy");
+                lblIdRegistro.Text = registro.id.Equals(null) ? "" : registro.id.ToString();
+                lblCodUnique.Text = registro.uniqueIdentifier.Equals(null) ? "" : registro.uniqueIdentifier.ToString();
+                lblRadicado.Text = registro.rad.Equals(null) ? "" : registro.rad.ToString();
+                lblMarcoNormativo.Text = registro.proceso.Equals(null) ? "" : registro.proceso.ToString();
+                lblHechoVictimizante.Text = registro.hechoVictimizante1.nombreHechoVictimizante.Equals(null) ? "" : registro.hechoVictimizante1.nombreHechoVictimizante.ToString();
+                lblDeptoOcurrenciaHecho.Text = registro.dane.nombreDepto.Equals(null) ? "" : registro.dane.nombreDepto.ToString();
+                lblMuniOcurrencia.Text = registro.dane.nombreMunicipio.Equals(null) ? "" : registro.dane.nombreMunicipio.ToString();
+                lblFechaOcurrencia.Text = registro.fechaOcurrenciaHecho.Equals(null) ? "" : registro.fechaOcurrenciaHecho.ToString("dd/MM/yyyy");
 
                 // se carga la informacion de la victimas en los labels del panel de consulta
-                lblPrimerNombre.Text = registro.persona1.primerNombre.ToString();
-                lblSegundoNombre.Text = registro.persona1.segundoNombre.ToString();
-                lblPrimerApellido.Text = registro.persona1.primerApellido.ToString();
-                lblSegundoApellido.Text = registro.persona1.segundoApellido.ToString();
-                lblGenero.Text = registro.persona1.genero1.descripcionGenero.ToString();
-                lblTipoDocumento.Text = registro.persona1.tipoDocumento1.descripcionDocumento.ToString();
-                lblNoDocumento.Text = registro.persona1.noDocumento.ToString();
-                lblFechaNacimiento.Text = registro.persona1.fechaNacimiento.ToString("dd/MM/yyyy");
+                lblPrimerNombre.Text = registro.persona1.primerNombre.Equals(null) ? "" : registro.persona1.primerNombre.ToString();
+                lblSegundoNombre.Text = registro.persona1.segundoNombre.Equals(null) ? "" : registro.persona1.segundoNombre.ToString();
+                lblPrimerApellido.Text = registro.persona1.primerApellido.Equals(null) ? "" : registro.persona1.primerApellido.ToString();
+                lblSegundoApellido.Text = registro.persona1.segundoApellido.Equals(null) ? "" : registro.persona1.segundoApellido.ToString();
+                lblGenero.Text = registro.persona1.genero1.descripcionGenero.Equals(null) ? "" : registro.persona1.genero1.descripcionGenero.ToString();
+                lblTipoDocumento.Text = registro.persona1.tipoDocumento1.descripcionDocumento.Equals(null) ? "" : registro.persona1.tipoDocumento1.descripcionDocumento.ToString();
+                lblNoDocumento.Text = registro.persona1.noDocumento.Equals(null) ? "" : registro.persona1.noDocumento.ToString();
+                lblFechaNacimiento.Text = registro.persona1.fechaNacimiento.Equals(null) ? "" : registro.persona1.fechaNacimiento.ToString("dd/MM/yyyy");
                 lblParentesco.Text = registro.parentesco.Equals(null) ? "No Asignado" : registro.parentesco1.nombreParentesco.ToString();
                 lblPorcentaje.Text = registro.parentesco.Equals(null) ? "No Asignado" : registro.porcentaje;
                 // Se carga la informacion de la victima en los TextBoxes
                 //cargar la informacion de los textBox
-                txtPrimerNombre.Text = registro.persona1.primerNombre.ToString();
-                txtSegundoNombre.Text = registro.persona1.segundoNombre.ToString();
-                txtPrimerApellido.Text = registro.persona1.primerApellido.ToString();
-                txtSegundoApellido.Text = registro.persona1.segundoApellido.ToString();
+                txtPrimerNombre.Text = registro.persona1.primerNombre.Equals(null) ? "" : registro.persona1.primerNombre.ToString();
+                txtSegundoNombre.Text = registro.persona1.segundoNombre.Equals(null) ? "" : registro.persona1.segundoNombre.ToString();
+                txtPrimerApellido.Text = registro.persona1.primerApellido.Equals(null) ? "" : registro.persona1.primerApellido.ToString();
+                txtSegundoApellido.Text = registro.persona1.segundoApellido.Equals(null) ? "" : registro.persona1.segundoApellido.ToString();
                 ddlGeneroDestinatario.SelectedValue = registro.persona1.genero.ToString();
-                ddlTipoDocumento.SelectedValue = registro.persona1.tipoDocumento.ToString();
-                txtNoDocumento.Text = registro.persona1.noDocumento.ToString();
-                txtFechaNacimiento.Text = registro.persona1.fechaNacimiento.ToShortDateString();
+                ddlTipoDocumento.SelectedValue = registro.persona1.tipoDocumento.Equals(null) ? "" : registro.persona1.tipoDocumento.ToString();
+                txtNoDocumento.Text = registro.persona1.noDocumento.Equals(null) ? "" : registro.persona1.noDocumento.ToString();
+                txtFechaNacimiento.Text = registro.persona1.fechaNacimiento.Equals(null) ? "": registro.persona1.fechaNacimiento.ToString("dd/MM/yyyy");
 
                 try
                 {

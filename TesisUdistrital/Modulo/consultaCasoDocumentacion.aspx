@@ -1,13 +1,15 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="consultaCasoDocumentacion.aspx.cs" Inherits="TesisUdistrital.Modulo.consultaCasoDocumentacion" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <asp:Panel ID="PnlMensajes" runat="server">
-    </asp:Panel>
+    <div class="row">
+        <div class="col-lg-12">
+            <asp:PlaceHolder runat="server" ID="ErrorMessage" Visible="true">
+                <asp:Panel ID="panelMensajes" runat="server"></asp:Panel>
+            </asp:PlaceHolder>
+        </div>
+    </div>
     <div class="row">
         <h2>Módulo de Documentación de Núcleos Familiares</h2>
         <div class="col-lg-12">
-            <asp:PlaceHolder runat="server" ID="ErrorMessage" Visible="true">
-                        <asp:Panel ID="panelMensajes" runat="server"></asp:Panel>
-            </asp:PlaceHolder>
             <div class="panel-group">
                 <div class="panel panel-default" style="margin-top:10px;">
                     <div>
