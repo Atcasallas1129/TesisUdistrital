@@ -12,7 +12,7 @@ namespace TesisUdistrital
     using System;
     using System.Collections.Generic;
     
-    public partial class vw_consultaCasoDocumentacion
+    public partial class vw_consultaCasoDocumentacionWS
     {
         public long id { get; set; }
         public System.Guid uniqueIdentifier { get; set; }
@@ -44,7 +44,6 @@ namespace TesisUdistrital
         public string noDocumentoDestinatario { get; set; }
         public System.DateTime fechaNacimientoDestinatario { get; set; }
         public string GeneroDestinatario { get; set; }
-        public string nombreParentesco { get; set; }
         public string porcentaje { get; set; }
         public Nullable<long> usuarioModificacion { get; set; }
         public Nullable<System.DateTime> fechaModificacion { get; set; }

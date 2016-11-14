@@ -32,7 +32,6 @@ namespace TesisUdistrital
         public string noDocumento { get; set; }
         public System.DateTime fechaNacimiento { get; set; }
         public long genero { get; set; }
-        public Nullable<bool> personaModificada { get; set; }
     
         public virtual genero genero1 { get; set; }
         public virtual tipoDocumento tipoDocumento1 { get; set; }

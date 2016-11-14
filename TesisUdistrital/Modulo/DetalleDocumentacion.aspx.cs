@@ -77,7 +77,6 @@ namespace TesisUdistrital.Modulo
                 registro.porcentaje = porcentaje;
                 registro.usuarioModificacion = (Session["usuarioLogeado"] as usuario).id;
                 registro.fechaModificacion = DateTime.Now;
-                registro.persona1.personaModificada = true;
                 registro.regModificado = true;
                 //Hacer persistencia de datos en la base
                 contextoAct.SaveChanges();

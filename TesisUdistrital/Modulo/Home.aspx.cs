@@ -235,7 +235,6 @@ namespace TesisUdistrital.Modulo
                         nvaPersona.noDocumento = personaR.noDocumento;
                         nvaPersona.fechaNacimiento = personaR.fechaNacimiento;
                         nvaPersona.genero = personaR.genero;
-                        nvaPersona.personaModificada = false;
                         contextoL.persona.Add(nvaPersona);
                         contextoL.SaveChanges();
                     }
@@ -271,6 +270,13 @@ namespace TesisUdistrital.Modulo
                             nvoRegistro.idPersonaDestinatario = registroInsertar.idPersonaDestinatario;
                             nvoRegistro.regModificado = false;
                             contextoL.procesoDocumentacion.Add(nvoRegistro);
+                            usuarioXradicado NvaAsignacionLocal = new usuarioXradicado();
+                            NvaAsignacionLocal.rad = registroInsertar.rad;
+                            NvaAsignacionLocal.proceso = registroInsertar.proceso;
+                            NvaAsignacionLocal.idusuario = (Session["usuarioLogeado"] as usuario).id;
+                            NvaAsignacionLocal.estado = true;
+                            NvaAsignacionLocal.fechaAsignacion = DateTime.Now;
+                            contextoL.usuarioXradicado.Add(NvaAsignacionLocal);
                             contextoL.SaveChanges();
                         }
                     }
