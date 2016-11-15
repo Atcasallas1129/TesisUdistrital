@@ -75,12 +75,12 @@ namespace TesisUdistrital.Account
                 valido = contexto.usuario.Any(X => X.usuarioLogin == usuario && X.contrasena == contrasenaValida);
                 return valido;
             }
-            catch
+            catch (SystemException ex)
             {
                 Session["usuarioLogeado"] = null;
                 PnlMensajes.CssClass = "alert alert-danger";
                 Label textoError = new Label();
-                textoError.Text = "Error: No se ha podido realizar la tarea solicitada, intente nuevamente";
+                textoError.Text = " "+ex.ToString();
                 PnlMensajes.Controls.Add(textoError);
                 bool valido = false;
                 return valido;

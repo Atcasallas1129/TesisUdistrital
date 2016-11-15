@@ -242,6 +242,7 @@
     <Content Include="LocalModel.edmx.diagram">
       <DependentUpon>LocalModel.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\Alvaro Tovar.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="RemoteModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
