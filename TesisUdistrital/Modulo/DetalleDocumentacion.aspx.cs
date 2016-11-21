@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -221,6 +222,136 @@ namespace TesisUdistrital.Modulo
                     ddlParentescoDestinatario.SelectedValue = null;
                 }
                 txtPorcentaje.Text = registro.parentesco.Equals(null) ? "0" : registro.porcentaje;
+            }
+        }
+
+        protected void linqDataSourceArchivosXRadicado_Selecting(object sender, LinqDataSourceSelectEventArgs e)
+        {
+            try
+            {
+                DocumentacionDemoLocalEntities contexto = new DocumentacionDemoLocalEntities();
+                procesoDocumentacion pago = contexto.procesoDocumentacion.FirstOrDefault(X => X.id == idRegistroSeleccionado);
+
+                var resultado = from p in contexto.soporteXRadicado
+                                where p.rad == pago.rad
+                                select p;
+                e.Result = resultado.ToArray();
+            }
+            catch (Exception ex)
+            {
+                PnlMensajes.CssClass = "alert alert-danger";
+                Label textoError = new Label();
+                textoError.Text = "Error al cargar la información.";
+                PnlMensajes.Controls.Add(textoError);
+            }
+        }
+        protected void GridViewArchivosXRadicado_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            try
+            {
+                if (e.CommandName.Equals("descargar"))
+                {
+
+                    int index = Convert.ToInt32(e.CommandArgument);
+
+                    String rutaArchivosSoporte = System.Configuration.ConfigurationManager.AppSettings["RutaArchivosSoporte"].ToString();
+                    String rutaRelativa = GridViewArchivosXRadicado.Rows[index].Cells[3].Text;
+                    String rutaDeDescarga = @rutaArchivosSoporte + rutaRelativa;
+
+                    Session["_SESSION_URLDESCARGA"] = rutaDeDescarga;
+                    Response.Redirect("~/Modulo/Descarga.aspx", true);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                PnlMensajes.CssClass = "alert alert-danger";
+                Label textoError = new Label();
+                textoError.Text = "Error al cargar la información, detalle del error: "+ex.ToString();
+                PnlMensajes.Controls.Add(textoError);
+
+            }
+        }
+
+        protected void btnCargarSoportes_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (fUloadSoportes.HasFile && !ddltipoSoporte.SelectedItem.Value.Equals("") && !lblRadicado.Equals(""))
+                {
+
+                    string rad = lblRadicado.Text;
+
+                    DocumentacionDemoLocalEntities contexto = new DocumentacionDemoLocalEntities();
+                    soporteXRadicado soportexradicado = new soporteXRadicado();
+                    string radicado = rad;
+
+                    string rutaCarpetaFisica = System.Configuration.ConfigurationManager.AppSettings["RutaArchivosSoporte"].ToString();
+                    string rutaCarpeta = radicado.Substring((radicado.Length - 3)) + "\\" + radicado;
+
+                    string rutaArchivo = @rutaCarpetaFisica + "\\" + rutaCarpeta;
+                    string noDocumentoDestinatario = lblNoDocumento.Text;
+
+
+                    if (!Directory.Exists(rutaArchivo))
+                    {
+                        Directory.CreateDirectory(rutaArchivo);
+                    }
+
+
+                    //Registro del Soporte en la Base de Datos
+                    persona Persona = contexto.persona.FirstOrDefault(X => X.noDocumento == noDocumentoDestinatario);
+                    Int64 idPersonaVictima = Persona.idPersona;
+                    Int64 IdSoporte = Convert.ToInt64(ddltipoSoporte.SelectedValue.ToString());
+
+                    soportexradicado.idSoporte = IdSoporte;
+                    soportexradicado.idPersona = idPersonaVictima;
+                    soportexradicado.rad = radicado;
+                    soportexradicado.estadoSoporte = true;
+
+                    soportexradicado.usuarioCreacionSoporte = idUsuarioLogeado;
+                    soportexradicado.fechaCreacionSoporte = DateTime.Now;
+                    contexto.soporteXRadicado.Add(soportexradicado);
+                    contexto.SaveChanges();
+                    soportexradicado.rutaSoporte = rutaCarpeta + "\\" + soportexradicado.idSoportePersona + "-" + noDocumentoDestinatario + "-" + ddltipoSoporte.SelectedItem.Value + Path.GetExtension(fUloadSoportes.FileName);
+                    contexto.SaveChanges();
+
+                    //Guardado del archivo en el disco 
+                    fUloadSoportes.SaveAs(rutaArchivo + "\\" + soportexradicado.idSoportePersona + "-" + noDocumentoDestinatario + "-" + ddltipoSoporte.SelectedItem.Value + Path.GetExtension(fUloadSoportes.FileName));
+
+                    //Recarga del grilla de documentos por Radicado
+                    GridViewArchivosXRadicado.DataBind();
+                }
+            }
+            catch(SystemException ex)
+            {
+                PnlMensajes.CssClass = "alert alert-danger";
+                Label textoError = new Label();
+                textoError.Text = "Error al cargar el soporte del radicado, detalle del error: " + ex.ToString();
+                PnlMensajes.Controls.Add(textoError);
+            }
+        }
+
+        protected void ddltipoSoporte_Init(object sender, EventArgs e)
+        {
+            try
+            {
+                DocumentacionDemoLocalEntities contexto = new DocumentacionDemoLocalEntities();
+                var tipoSoportes = from p in contexto.soporte
+                                   select new
+                                   {
+                                       soporteId = p.idSoporte,
+                                       tipoSoporteNombre = p.descripcionSoporte
+                                   };
+                ddltipoSoporte.DataSource = tipoSoportes.ToArray();
+                ddltipoSoporte.DataBind();
+            }
+            catch
+            {
+                PnlMensajes.CssClass = "alert alert-danger";
+                Label textoError = new Label();
+                textoError.Text = "Error al cargar la información.";
+                PnlMensajes.Controls.Add(textoError);
             }
         }
     }

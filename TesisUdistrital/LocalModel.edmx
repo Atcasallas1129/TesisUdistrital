@@ -86,7 +86,7 @@
           <Property Name="idPersona" Type="bigint" Nullable="false" />
           <Property Name="rad" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="estadoSoporte" Type="bit" Nullable="false" />
-          <Property Name="rutaSoporte" Type="text" Nullable="false" />
+          <Property Name="rutaSoporte" Type="text" />
           <Property Name="usuarioCreacionSoporte" Type="bigint" Nullable="false" />
           <Property Name="fechaCreacionSoporte" Type="datetime" Nullable="false" />
         </EntityType>
@@ -640,13 +640,8 @@ warning 6002: The table/view 'DocumentacionDemoLocal.dbo.vw_informacionPersona' 
           <EntitySet Name="hechoVictimizante" EntityType="DocumentacionDemoLocalModel.hechoVictimizante" />
           <EntitySet Name="parentesco" EntityType="DocumentacionDemoLocalModel.parentesco" />
           <EntitySet Name="soporte" EntityType="DocumentacionDemoLocalModel.soporte" />
-          <EntitySet Name="soporteXRadicado" EntityType="DocumentacionDemoLocalModel.soporteXRadicado" />
           <EntitySet Name="sysdiagrams" EntityType="DocumentacionDemoLocalModel.sysdiagrams" />
           <EntitySet Name="tipoDocumento" EntityType="DocumentacionDemoLocalModel.tipoDocumento" />
-          <AssociationSet Name="FK_soporteXRadicado_soporte" Association="DocumentacionDemoLocalModel.FK_soporteXRadicado_soporte">
-            <End Role="soporte" EntitySet="soporte" />
-            <End Role="soporteXRadicado" EntitySet="soporteXRadicado" />
-          </AssociationSet>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -720,13 +715,18 @@ warning 6002: The table/view 'DocumentacionDemoLocal.dbo.vw_informacionPersona' 
             <End Role="persona" EntitySet="persona" />
             <End Role="procesoDocumentacion" EntitySet="procesoDocumentacion" />
           </AssociationSet>
+          <AssociationSet Name="FK_procesoDocumentacion_usuario" Association="DocumentacionDemoLocalModel.FK_procesoDocumentacion_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="procesoDocumentacion" EntitySet="procesoDocumentacion" />
+          </AssociationSet>
+          <EntitySet Name="soporteXRadicado" EntityType="DocumentacionDemoLocalModel.soporteXRadicado" />
           <AssociationSet Name="FK_soporteXRadicado_persona" Association="DocumentacionDemoLocalModel.FK_soporteXRadicado_persona">
             <End Role="persona" EntitySet="persona" />
             <End Role="soporteXRadicado" EntitySet="soporteXRadicado" />
           </AssociationSet>
-          <AssociationSet Name="FK_procesoDocumentacion_usuario" Association="DocumentacionDemoLocalModel.FK_procesoDocumentacion_usuario">
-            <End Role="usuario" EntitySet="usuario" />
-            <End Role="procesoDocumentacion" EntitySet="procesoDocumentacion" />
+          <AssociationSet Name="FK_soporteXRadicado_soporte" Association="DocumentacionDemoLocalModel.FK_soporteXRadicado_soporte">
+            <End Role="soporte" EntitySet="soporte" />
+            <End Role="soporteXRadicado" EntitySet="soporteXRadicado" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="dane">
@@ -772,21 +772,6 @@ warning 6002: The table/view 'DocumentacionDemoLocal.dbo.vw_informacionPersona' 
           <Property Name="descripcionSoporte" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="soporteXRadicado" Relationship="DocumentacionDemoLocalModel.FK_soporteXRadicado_soporte" FromRole="soporte" ToRole="soporteXRadicado" />
         </EntityType>
-        <EntityType Name="soporteXRadicado">
-          <Key>
-            <PropertyRef Name="idSoportePersona" />
-          </Key>
-          <Property Name="idSoportePersona" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idSoporte" Type="Int64" Nullable="false" />
-          <Property Name="idPersona" Type="Int64" Nullable="false" />
-          <Property Name="rad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="estadoSoporte" Type="Boolean" Nullable="false" />
-          <Property Name="rutaSoporte" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="usuarioCreacionSoporte" Type="Int64" Nullable="false" />
-          <Property Name="fechaCreacionSoporte" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="soporte" Relationship="DocumentacionDemoLocalModel.FK_soporteXRadicado_soporte" FromRole="soporteXRadicado" ToRole="soporte" />
-          <NavigationProperty Name="persona" Relationship="DocumentacionDemoLocalModel.FK_soporteXRadicado_persona" FromRole="soporteXRadicado" ToRole="persona" />
-        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -806,18 +791,6 @@ warning 6002: The table/view 'DocumentacionDemoLocal.dbo.vw_informacionPersona' 
           <NavigationProperty Name="usuario" Relationship="DocumentacionDemoLocalModel.FK_usuario_tipoDocumento" FromRole="tipoDocumento" ToRole="usuario" />
           <NavigationProperty Name="persona" Relationship="DocumentacionDemoLocalModel.FK_persona_tipoDocumento" FromRole="tipoDocumento" ToRole="persona" />
         </EntityType>
-        <Association Name="FK_soporteXRadicado_soporte">
-          <End Type="DocumentacionDemoLocalModel.soporte" Role="soporte" Multiplicity="1" />
-          <End Type="DocumentacionDemoLocalModel.soporteXRadicado" Role="soporteXRadicado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="soporte">
-              <PropertyRef Name="idSoporte" />
-            </Principal>
-            <Dependent Role="soporteXRadicado">
-              <PropertyRef Name="idSoporte" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
           <Property Type="Binary" Name="definition" Nullable="true" />
@@ -1175,6 +1148,33 @@ warning 6002: The table/view 'DocumentacionDemoLocal.dbo.vw_informacionPersona' 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_procesoDocumentacion_usuario">
+          <End Type="DocumentacionDemoLocalModel.usuario" Role="usuario" Multiplicity="0..1" />
+          <End Type="DocumentacionDemoLocalModel.procesoDocumentacion" Role="procesoDocumentacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="procesoDocumentacion">
+              <PropertyRef Name="usuarioModificacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="soporteXRadicado">
+          <Key>
+            <PropertyRef Name="idSoportePersona" />
+          </Key>
+          <Property Name="idSoportePersona" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idSoporte" Type="Int64" Nullable="false" />
+          <Property Name="idPersona" Type="Int64" Nullable="false" />
+          <Property Name="rad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="estadoSoporte" Type="Boolean" Nullable="false" />
+          <Property Name="rutaSoporte" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="usuarioCreacionSoporte" Type="Int64" Nullable="false" />
+          <Property Name="fechaCreacionSoporte" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="persona" Relationship="DocumentacionDemoLocalModel.FK_soporteXRadicado_persona" FromRole="soporteXRadicado" ToRole="persona" />
+          <NavigationProperty Name="soporte" Relationship="DocumentacionDemoLocalModel.FK_soporteXRadicado_soporte" FromRole="soporteXRadicado" ToRole="soporte" />
+        </EntityType>
         <Association Name="FK_soporteXRadicado_persona">
           <End Type="DocumentacionDemoLocalModel.persona" Role="persona" Multiplicity="1" />
           <End Type="DocumentacionDemoLocalModel.soporteXRadicado" Role="soporteXRadicado" Multiplicity="*" />
@@ -1187,15 +1187,15 @@ warning 6002: The table/view 'DocumentacionDemoLocal.dbo.vw_informacionPersona' 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_procesoDocumentacion_usuario">
-          <End Type="DocumentacionDemoLocalModel.usuario" Role="usuario" Multiplicity="0..1" />
-          <End Type="DocumentacionDemoLocalModel.procesoDocumentacion" Role="procesoDocumentacion" Multiplicity="*" />
+        <Association Name="FK_soporteXRadicado_soporte">
+          <End Type="DocumentacionDemoLocalModel.soporte" Role="soporte" Multiplicity="1" />
+          <End Type="DocumentacionDemoLocalModel.soporteXRadicado" Role="soporteXRadicado" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="usuario">
-              <PropertyRef Name="id" />
+            <Principal Role="soporte">
+              <PropertyRef Name="idSoporte" />
             </Principal>
-            <Dependent Role="procesoDocumentacion">
-              <PropertyRef Name="usuarioModificacion" />
+            <Dependent Role="soporteXRadicado">
+              <PropertyRef Name="idSoporte" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1245,20 +1245,6 @@ warning 6002: The table/view 'DocumentacionDemoLocal.dbo.vw_informacionPersona' 
                 <ScalarProperty Name="descripcionSoporte" ColumnName="descripcionSoporte" />
                 <ScalarProperty Name="codigoSoporte" ColumnName="codigoSoporte" />
                 <ScalarProperty Name="idSoporte" ColumnName="idSoporte" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="soporteXRadicado">
-            <EntityTypeMapping TypeName="DocumentacionDemoLocalModel.soporteXRadicado">
-              <MappingFragment StoreEntitySet="soporteXRadicado">
-                <ScalarProperty Name="fechaCreacionSoporte" ColumnName="fechaCreacionSoporte" />
-                <ScalarProperty Name="usuarioCreacionSoporte" ColumnName="usuarioCreacionSoporte" />
-                <ScalarProperty Name="rutaSoporte" ColumnName="rutaSoporte" />
-                <ScalarProperty Name="estadoSoporte" ColumnName="estadoSoporte" />
-                <ScalarProperty Name="rad" ColumnName="rad" />
-                <ScalarProperty Name="idPersona" ColumnName="idPersona" />
-                <ScalarProperty Name="idSoporte" ColumnName="idSoporte" />
-                <ScalarProperty Name="idSoportePersona" ColumnName="idSoportePersona" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1462,6 +1448,20 @@ warning 6002: The table/view 'DocumentacionDemoLocal.dbo.vw_informacionPersona' 
                 <ScalarProperty Name="primerNombre" ColumnName="primerNombre" />
                 <ScalarProperty Name="idPersonaUnique" ColumnName="idPersonaUnique" />
                 <ScalarProperty Name="idPersona" ColumnName="idPersona" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="soporteXRadicado">
+            <EntityTypeMapping TypeName="DocumentacionDemoLocalModel.soporteXRadicado">
+              <MappingFragment StoreEntitySet="soporteXRadicado">
+                <ScalarProperty Name="fechaCreacionSoporte" ColumnName="fechaCreacionSoporte" />
+                <ScalarProperty Name="usuarioCreacionSoporte" ColumnName="usuarioCreacionSoporte" />
+                <ScalarProperty Name="rutaSoporte" ColumnName="rutaSoporte" />
+                <ScalarProperty Name="estadoSoporte" ColumnName="estadoSoporte" />
+                <ScalarProperty Name="rad" ColumnName="rad" />
+                <ScalarProperty Name="idPersona" ColumnName="idPersona" />
+                <ScalarProperty Name="idSoporte" ColumnName="idSoporte" />
+                <ScalarProperty Name="idSoportePersona" ColumnName="idSoportePersona" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

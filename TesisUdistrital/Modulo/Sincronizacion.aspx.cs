@@ -79,6 +79,25 @@ namespace TesisUdistrital.Modulo
                     registro.persona1.fechaNacimiento = elemento.fechaNacimientoDestinatario;
                     registro.persona1.genero = Genero.idGenero;
                     contextoR.SaveChanges();
+                    var soportesXradicado = from p in contextoL.soporteXRadicado.AsNoTracking()
+                                            where p.rad == elemento.rad && p.idPersona == elemento.idPersonaDestinatario
+                                            select p;
+                    if(soportesXradicado != null)
+                    {
+                        foreach (var soporte in soportesXradicado)
+                        {
+                            soporteXRadicado NvoSoporteRadicado = new soporteXRadicado();
+                            NvoSoporteRadicado.idSoporte = soporte.idSoporte;
+                            NvoSoporteRadicado.idPersona = soporte.idPersona;
+                            NvoSoporteRadicado.rad = soporte.rad;
+                            NvoSoporteRadicado.estadoSoporte = soporte.estadoSoporte;
+                            NvoSoporteRadicado.rutaSoporte = soporte.rutaSoporte;
+                            NvoSoporteRadicado.usuarioCreacionSoporte = soporte.usuarioCreacionSoporte;
+                            NvoSoporteRadicado.fechaCreacionSoporte = soporte.fechaCreacionSoporte;
+                            contextoR.soporteXRadicado.Add(NvoSoporteRadicado);
+                            contextoR.SaveChanges();
+                        }
+                    }
                 }
                 foreach(var item in resultado)
                 {
@@ -122,12 +141,24 @@ namespace TesisUdistrital.Modulo
                 Script = "delete from procesodocumentacion where uniqueidentifier = '" + objeto.uniqueIdentifier.ToString() + "'";
                 c.ConsultaAUX(Script);
             }
-            ////Eliminar asignacion del caso
+            //Eliminar asignacion del caso
             usuarioXradicado asignacionEliminar = contextoL.usuarioXradicado.FirstOrDefault(X => X.rad == objeto.rad && X.proceso == objeto.proceso);
             if (asignacionEliminar != null)
             {
                 Script = "delete from usuarioxradicado where rad = '" + objeto.rad.ToString() + "' and proceso = '" + objeto.proceso.ToString() + "'";
                 c.ConsultaAUX(Script);
+            }
+            //Eliminar soportes del caso
+            var soporteXradicado = from p in contextoL.soporteXRadicado
+                                   where p.rad == objeto.rad && p.idPersona == objeto.idPersonaDestinatario
+                                   select p;
+            if(soporteXradicado != null)
+            {
+                foreach (var soporte in soporteXradicado)
+                {
+                    Script = "delete from soporteXRadicado where idSoportePersona = '" + soporte.idSoportePersona.ToString() + "'";
+                    c.ConsultaAUX(Script);
+                }
             }
         }
 

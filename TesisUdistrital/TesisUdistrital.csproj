@@ -228,6 +228,7 @@
       <LastGenOutput>LocalModel.cs</LastGenOutput>
     </Content>
     <Content Include="Modulo\consultaCasoDocumentacion.aspx" />
+    <Content Include="Modulo\Descarga.aspx" />
     <Content Include="Modulo\DetalleDocumentacion.aspx" />
     <Content Include="Modulo\Home.aspx" />
     <Content Include="Modulo\Sincronizacion.aspx" />
@@ -429,7 +430,7 @@
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
     <Compile Include="dane.cs">
-      <DependentUpon>RemoteModel.tt</DependentUpon>
+      <DependentUpon>LocalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -439,13 +440,13 @@
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="genero.cs">
-      <DependentUpon>RemoteModel.tt</DependentUpon>
+      <DependentUpon>LocalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="hechoVictimizante.cs">
-      <DependentUpon>RemoteModel.tt</DependentUpon>
+      <DependentUpon>LocalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="LocalModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -477,6 +478,13 @@
     <Compile Include="Modulo\consultaCasoDocumentacion.aspx.designer.cs">
       <DependentUpon>consultaCasoDocumentacion.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Modulo\Descarga.aspx.cs">
+      <DependentUpon>Descarga.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modulo\Descarga.aspx.designer.cs">
+      <DependentUpon>Descarga.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Modulo\DetalleDocumentacion.aspx.cs">
       <DependentUpon>DetalleDocumentacion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -499,13 +507,13 @@
       <DependentUpon>Sincronizacion.aspx</DependentUpon>
     </Compile>
     <Compile Include="parentesco.cs">
-      <DependentUpon>RemoteModel.tt</DependentUpon>
+      <DependentUpon>LocalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="persona.cs">
-      <DependentUpon>RemoteModel.tt</DependentUpon>
+      <DependentUpon>LocalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="procesoDocumentacion.cs">
-      <DependentUpon>RemoteModel.tt</DependentUpon>
+      <DependentUpon>LocalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RemoteModel.Context.cs">
@@ -538,29 +546,29 @@
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
     <Compile Include="soporte.cs">
-      <DependentUpon>RemoteModel.tt</DependentUpon>
+      <DependentUpon>LocalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="soporteXRadicado.cs">
-      <DependentUpon>RemoteModel.tt</DependentUpon>
+      <DependentUpon>LocalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>RemoteModel.tt</DependentUpon>
+      <DependentUpon>LocalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_helpdiagrams_Result.cs">
-      <DependentUpon>RemoteModel.tt</DependentUpon>
+      <DependentUpon>LocalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="sysdiagrams.cs">
-      <DependentUpon>RemoteModel.tt</DependentUpon>
+      <DependentUpon>LocalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="tipoDocumento.cs">
-      <DependentUpon>RemoteModel.tt</DependentUpon>
+      <DependentUpon>LocalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="usuario.cs">
-      <DependentUpon>RemoteModel.tt</DependentUpon>
+      <DependentUpon>LocalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="usuarioXradicado.cs">
-      <DependentUpon>RemoteModel.tt</DependentUpon>
+      <DependentUpon>LocalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
@@ -570,13 +578,13 @@
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
     <Compile Include="vw_consultaCasoDocumentacion.cs">
-      <DependentUpon>RemoteModel.tt</DependentUpon>
+      <DependentUpon>LocalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="vw_consultaCasoDocumentacionWS.cs">
       <DependentUpon>LocalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="vw_informacionPersona.cs">
-      <DependentUpon>RemoteModel.tt</DependentUpon>
+      <DependentUpon>LocalModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

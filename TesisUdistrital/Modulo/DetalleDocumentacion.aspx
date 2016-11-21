@@ -171,4 +171,52 @@
             </div>
         </asp:Panel>
     </div>
+    <div class="row">
+        <h3>Soportes Asociados al caso</h3>
+        <div class="col-lg-12" style="margin-top:15px; margin-bottom:15px;">
+            <div class="col-md-4">
+                <div class="input-group">
+                    <label>Cargar Soporte</label>
+                    <div class="input-group">
+                        <asp:DropDownList ID="ddltipoSoporte" runat="server" DataValueField ="soporteId" CssClass="form-control" Width="100%" DataTextField ="tipoSoporteNombre" OnInit="ddltipoSoporte_Init"></asp:DropDownList>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="input-group">
+                    <label>Cargar Soporte</label>
+                    <div class="input-group">
+                        <asp:FileUpload ID="fUloadSoportes" runat="server" CssClass ="input-sm form-control" Width="100%"/>
+                        <span class="input-group-btn">
+                            <asp:Button ID="btnCargarSoportes" runat="server" CssClass="btn btn-success btn-sm" Text="Cargar" OnClick="btnCargarSoportes_Click"/>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                <ContentTemplate>
+                    <asp:GridView ID="GridViewArchivosXRadicado" runat="server" DataSourceID="linqDataSourceArchivosXRadicado" DataKeyNames="idSoportePersona" AllowPaging="True" CssClass="table" AutoGenerateColumns="False" PageSize="10" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" EmptyDataText="No existen soportes asociados al radicado"  OnRowCommand="GridViewArchivosXRadicado_RowCommand">
+                        <Columns>
+                            <asp:BoundField DataField="idSoportePersona" HeaderText="idSoportePersona" ReadOnly="True" Visible="false" />
+                            <asp:BoundField DataField="idSoporte" HeaderText="Tipo Soporte" ReadOnly="True" />
+                            <asp:BoundField DataField="rad" HeaderText="Radicado" ReadOnly="True" />
+                            <asp:BoundField DataField="rutaSoporte" HeaderText="Dirección" ReadOnly="True" />
+                            <asp:BoundField DataField="fechaCreacionSoporte" HeaderText="Fecha Creación" ReadOnly="True" />
+                            <asp:ButtonField HeaderText="Descargar" CommandName="descargar" ButtonType="Button" Text="Descargar" ControlStyle-CssClass="btn btn-xs btn-primary" />
+                        </Columns>
+                        <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
+                        <HeaderStyle BackColor="#EEEEEE" Font-Bold="True" ForeColor="#333333" Font-Size="Smaller" />
+                        <PagerStyle BackColor="White" ForeColor="Black" HorizontalAlign="Right" />
+                        <SelectedRowStyle BackColor="#CC3333" Font-Bold="True" ForeColor="White" />
+                        <RowStyle Font-Size="Smaller" />
+                        <SortedAscendingCellStyle BackColor="#F7F7F7" />
+                        <SortedAscendingHeaderStyle BackColor="#4B4B4B" />
+                        <SortedDescendingCellStyle BackColor="#E5E5E5" />
+                        <SortedDescendingHeaderStyle BackColor="#242121" />
+                    </asp:GridView>
+                    <asp:LinqDataSource ID="linqDataSourceArchivosXRadicado" runat="server" OnSelecting="linqDataSourceArchivosXRadicado_Selecting" OrderBy="idSoportePersona"></asp:LinqDataSource>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+        </div>
+    </div>
 </asp:Content>

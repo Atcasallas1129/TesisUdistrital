@@ -31,7 +31,7 @@
                                 <div class="input-group">
                                     <div class="input-group">
                                         <span class="input-group-btn">
-                                            <asp:Button ID="btnSincronizar" runat="server" CssClass="btn btn-success btn-sm" Text="Consultar" ToolTip="Sincronizar los casos que estan aptos para la sincronizacion con el sistema remoto" OnClick="btnSincronizar_Click"/>
+                                            <asp:Button ID="btnSincronizar" runat="server" CssClass="btn btn-success btn-sm" Text="Sincronizar" ToolTip="Sincronizar los casos que estan aptos para la sincronizacion con el sistema remoto" OnClick="btnSincronizar_Click"/>
                                         </span>
                                     </div>
                                 </div>
