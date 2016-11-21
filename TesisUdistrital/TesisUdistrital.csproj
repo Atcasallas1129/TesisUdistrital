@@ -228,8 +228,10 @@
       <LastGenOutput>LocalModel.cs</LastGenOutput>
     </Content>
     <Content Include="Modulo\consultaCasoDocumentacion.aspx" />
+    <Content Include="Modulo\ConsultaCasoDocumentacionRemoto.aspx" />
     <Content Include="Modulo\Descarga.aspx" />
     <Content Include="Modulo\DetalleDocumentacion.aspx" />
+    <Content Include="Modulo\DetalleDocumentacionRemoto.aspx" />
     <Content Include="Modulo\Home.aspx" />
     <Content Include="Modulo\Sincronizacion.aspx" />
     <Content Include="RemoteModel.edmx.diagram">
@@ -478,6 +480,13 @@
     <Compile Include="Modulo\consultaCasoDocumentacion.aspx.designer.cs">
       <DependentUpon>consultaCasoDocumentacion.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Modulo\ConsultaCasoDocumentacionRemoto.aspx.cs">
+      <DependentUpon>ConsultaCasoDocumentacionRemoto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modulo\ConsultaCasoDocumentacionRemoto.aspx.designer.cs">
+      <DependentUpon>ConsultaCasoDocumentacionRemoto.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Modulo\Descarga.aspx.cs">
       <DependentUpon>Descarga.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -491,6 +500,13 @@
     </Compile>
     <Compile Include="Modulo\DetalleDocumentacion.aspx.designer.cs">
       <DependentUpon>DetalleDocumentacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Modulo\DetalleDocumentacionRemoto.aspx.cs">
+      <DependentUpon>DetalleDocumentacionRemoto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modulo\DetalleDocumentacionRemoto.aspx.designer.cs">
+      <DependentUpon>DetalleDocumentacionRemoto.aspx</DependentUpon>
     </Compile>
     <Compile Include="Modulo\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>

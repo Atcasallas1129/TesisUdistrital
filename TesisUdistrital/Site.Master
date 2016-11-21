@@ -49,9 +49,18 @@
                     <a class="navbar-brand" runat="server" href="~/">Demo Tesis</a>
                 </div>
                 <div class="navbar-collapse collapse">
+                    <!-- ~/Modulo/consultaCasoDocumentacion.aspx -->
                     <ul class="nav navbar-nav">
                         <li><a runat="server" href="~/Modulo/Home.aspx">Descarga casos</a></li>
-                        <li><a runat="server" href="~/Modulo/consultaCasoDocumentacion.aspx">Documentación</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Documentación<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li role="presentation" class="dropdown-header">Ambiente Local</li>
+                                    <li id="liConsultaCasosAmbienteLocal" runat="server" ><a  href="~/Modulo/consultaCasoDocumentacion.aspx" runat="server">Documentacion Serv Local</a></li>
+                                <li role="presentation" class="dropdown-header">Ambiente Remoto</li>
+                                    <li id="liConsultaCasosAmbienteRemoto" runat="server" ><a  href="~/Modulo/ConsultaCasoDocumentacionRemoto.aspx" runat="server">Documentacion Serv Remoto</a></li>
+                            </ul>
+                        </li>
                         <li><a runat="server" href="~/Modulo/Sincronizacion.aspx">Sincronización</a></li>
                     </ul>
                     <asp:LoginView runat="server" ViewStateMode="Disabled">

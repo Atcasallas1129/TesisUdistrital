@@ -10,25 +10,7 @@
 namespace TesisUdistrital.Modulo {
     
     
-    public partial class Sincronizacion {
-        
-        /// <summary>
-        /// PlaceHolder1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder PlaceHolder1;
-        
-        /// <summary>
-        /// panel1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panel1;
+    public partial class ConsultaCasoDocumentacionRemoto {
         
         /// <summary>
         /// ErrorMessage control.
@@ -49,22 +31,40 @@ namespace TesisUdistrital.Modulo {
         protected global::System.Web.UI.WebControls.Panel panelMensajes;
         
         /// <summary>
-        /// btnSincronizar control.
+        /// txtRadicado control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSincronizar;
+        protected global::System.Web.UI.WebControls.TextBox txtRadicado;
         
         /// <summary>
-        /// dgvConsultaCasosDocumentacionLocal control.
+        /// txtDocumentoDestinatario control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dgvConsultaCasosDocumentacionLocal;
+        protected global::System.Web.UI.WebControls.TextBox txtDocumentoDestinatario;
+        
+        /// <summary>
+        /// btnBuscar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnBuscar;
+        
+        /// <summary>
+        /// dgvHistoricoNna control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView dgvHistoricoNna;
         
         /// <summary>
         /// LinqDataSource control.
