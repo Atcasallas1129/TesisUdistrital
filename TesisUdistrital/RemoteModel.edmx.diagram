@@ -10,10 +10,8 @@
         <EntityTypeShape EntityType="DocumentacionDemoModel.hechoVictimizante" Width="1.5" PointX="3" PointY="18.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DocumentacionDemoModel.parentesco" Width="1.5" PointX="3" PointY="20.375" IsExpanded="true" />
         <EntityTypeShape EntityType="DocumentacionDemoModel.soporte" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DocumentacionDemoModel.soporteXRadicado" Width="1.5" PointX="5.25" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DocumentacionDemoModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DocumentacionDemoModel.tipoDocumento" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
-        <AssociationConnector Association="DocumentacionDemoModel.FK_soporteXRadicado_soporte" ManuallyRouted="false" />
         <EntityTypeShape EntityType="DocumentacionDemoModel.usuario" Width="1.5" PointX="3" PointY="10.875" />
         <AssociationConnector Association="DocumentacionDemoModel.FK_usuario_tipoDocumento" />
         <EntityTypeShape EntityType="DocumentacionDemoModel.usuarioXradicado" Width="1.5" PointX="5.25" PointY="16.375" />
@@ -29,8 +27,10 @@
         <AssociationConnector Association="DocumentacionDemoModel.FK_persona_tipoDocumento" />
         <AssociationConnector Association="DocumentacionDemoModel.FK_procesoDocumentacion_persona" />
         <AssociationConnector Association="DocumentacionDemoModel.FK_procesoDocumentacion_persona1" />
-        <AssociationConnector Association="DocumentacionDemoModel.FK_soporteXRadicado_persona" />
         <AssociationConnector Association="DocumentacionDemoModel.FK_procesoDocumentacion_usuario" />
+        <EntityTypeShape EntityType="DocumentacionDemoModel.soporteXRadicado" Width="1.5" PointX="10.25" PointY="5.375" />
+        <AssociationConnector Association="DocumentacionDemoModel.FK_soporteXRadicado_persona" />
+        <AssociationConnector Association="DocumentacionDemoModel.FK_soporteXRadicado_soporte" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
